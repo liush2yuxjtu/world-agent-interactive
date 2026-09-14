@@ -1,0 +1,42 @@
+name: Design System CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  frontend-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Unit tests and production build
+        run: npm run check
+      - name: Install browser QA dependencies
+        run: |
+          python -m pip install -r requirements-dev.txt
+          python -m playwright install --with-deps chromium
+      - name: Real-origin browser workflow and snapshots
+        run: npm run test:browser
+      - name: Upload QA evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: design-system-browser-qa
+          path: docs/qa/
+          retention-days: 14
+      - name: Upload static production project
+        uses: actions/upload-artifact@v4
+        with:
+          name: design-system-static-site
+          path: dist/
+          include-hidden-files: true
+          retention-days: 14

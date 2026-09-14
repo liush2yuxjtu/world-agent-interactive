@@ -1,0 +1,17 @@
+{
+  "name": "world-agent-design-system",
+  "version": "1.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A live, source-driven design system frontend for World Agent.",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "start": "node scripts/dev.mjs",
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/dev.mjs --dist",
+    "test": "node --test tests/*.test.mjs",
+    "test:browser": "python tests/browser.py",
+    "check": "npm test && npm run build"
+  },
+  "engines": { "node": ">=20" }
+}

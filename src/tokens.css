@@ -1,0 +1,42 @@
+/* DESIGN_SYSTEM v1.0 — all semantic colors, type, spacing, surfaces and motion. */
+:root {
+  --color-brand: #315dff;
+  --color-brand-hover: #214ce8;
+  --color-brand-active: #1b40ca;
+  --color-brand-soft: #eaf0ff;
+  --color-brand-line: #b7c9ff;
+  --color-ink: #070d2d;
+  --color-text: #3e5485;
+  --color-muted: #647496;
+  --color-surface: #ffffff;
+  --color-surface-soft: #f8faff;
+  --color-input: #f5f7fc;
+  --color-border: #e6ecf7;
+  --color-frame: #203447;
+  --color-success: #218653;
+  --color-success-soft: #ebf8f1;
+  --color-error: #d94862;
+  --color-error-soft: #fff0f3;
+  --color-warning: #946008;
+  --color-warning-soft: #fff8e9;
+  --color-chart-a: #f17f98;
+  --color-chart-b: #377cfa;
+  --color-chart-c: #51bc8a;
+  --color-chart-a-low: #eaa0ac; --color-chart-b-low: #3862ff; --color-chart-c-low: #7dc0a0;
+  --color-purple: #8057ff;
+  --font-sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-editorial: "Kaiti SC", KaiTi, "AR PL UKai CN", "AR PL KaitiM Big5", serif;
+  --text-2xs: 10px; --text-xs: 11px; --text-sm: 12px; --text-md: 14px;
+  --text-lg: 16px; --text-xl: 20px; --text-2xl: 28px; --text-3xl: 38px;
+  --weight-normal: 400; --weight-medium: 500; --weight-semibold: 600; --weight-bold: 700;
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+  --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px; --space-12: 48px;
+  --radius-sm: 4px; --radius-md: 6px; --radius-lg: 8px; --radius-xl: 12px; --radius-2xl: 20px; --radius-pill: 999px;
+  --shadow-card: 0 4px 14px rgb(31 64 126 / 4%);
+  --shadow-button: 0 4px 9px rgb(49 93 255 / 15%);
+  --shadow-popover: 0 20px 80px rgb(7 13 45 / 20%);
+  --focus-ring: 0 0 0 3px rgb(49 93 255 / 25%);
+  --duration-fast: 150ms; --duration-normal: 250ms;
+  --ease-standard: cubic-bezier(.2,.8,.2,1);
+  --sidebar-width: 118px;
+}
