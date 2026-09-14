@@ -4,7 +4,7 @@ This directory contains the golden visual reference for the World Agent landing 
 
 ## Golden reference
 
-- `world-agent-reference.png` — primary UI reference supplied for the project.
+- `world-agent-reference.jpg` — primary UI reference supplied for the project and stored in Git.
 
 ## Usage
 
