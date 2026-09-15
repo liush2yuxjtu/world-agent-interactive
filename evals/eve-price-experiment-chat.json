@@ -1,0 +1,25 @@
+{
+  "feature": "eve-price-experiment-chat",
+  "source_of_truth": "intent/eve-price-experiment-chat/index.html",
+  "implementation": "assistant/index.html",
+  "cases": [
+    {
+      "id": "plan-before-action",
+      "given": "白桃气泡水，¥6 还是 ¥8 更好？",
+      "must_include": ["100 人 · 14 天 · 2 轮", "你批准后我才运行。", "待批准实验"]
+    },
+    {
+      "id": "approval-gates-action",
+      "trigger": "批准并运行",
+      "tool_order": ["run_experiment", "get_run", "check_reliability"]
+    },
+    {
+      "id": "calibration-boundary",
+      "must_include": ["示例数字不是现实预测", "现实销量仍需真实数据校准", "未校准机制模型"]
+    },
+    {
+      "id": "follow-up-context",
+      "prompts": ["为什么要先审批？", "还能继续追问吗？", "这等于真实市场预测吗？"]
+    }
+  ]
+}

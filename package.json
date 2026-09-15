@@ -1,16 +1,16 @@
 {
   "name": "world-agent-design-system",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "private": true,
   "type": "module",
-  "description": "World Agent product demo, experiment workspace, and live token-driven design system.",
+  "description": "World Agent product demo, experiment workspace, Eve chat feature intent, and live token-driven design system.",
   "scripts": {
     "dev": "node scripts/dev.mjs",
     "start": "node scripts/dev.mjs",
     "build": "node scripts/build.mjs",
     "preview": "node scripts/dev.mjs --dist",
     "test": "node --test tests/*.test.mjs",
-    "test:browser": "python tests/browser.py",
+    "test:browser": "python tests/browser.py && python tests/eve_chat_browser.py",
     "check": "npm test && npm run build"
   },
   "engines": { "node": ">=20" }
