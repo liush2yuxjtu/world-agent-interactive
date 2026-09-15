@@ -166,11 +166,11 @@ try:
             page.locator('[data-action="run"]').last.click()
             expect(page.locator('#run-dialog progress')).to_be_visible()
             page.wait_for_timeout(1600)
-            expect(page.locator('#run-dialog')).to_contain_text('仿真完成')
+            expect(page.locator('#run-dialog')).to_contain_text('示例已载入')
             page.get_by_role('button',name='查看结果').click()
             page.get_by_role('tab',name='人群分析').click()
             expect(page.locator('.alternate-result')).to_contain_text('25–34 岁')
-            passed('Five-step experiment path runs a simulation and switches result evidence')
+            passed('Five-step experiment path loads explicit example data and switches result evidence')
             page.set_viewport_size({'width':390,'height':844})
             page.reload(wait_until='domcontentloaded')
             assert page.evaluate('document.documentElement.scrollWidth')<=390
