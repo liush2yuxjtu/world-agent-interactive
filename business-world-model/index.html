@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8faff">
+  <title>Business World Model · Interactive Preview</title>
+  <link rel="stylesheet" href="../src/tokens.css">
+  <link rel="stylesheet" href="./app.css">
+</head>
+<body>
+  <a class="skip-link" href="#workspace">Skip to model</a>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="../business-world-model/" aria-label="Business World Model home">
+        <span class="brand-mark" aria-hidden="true">W</span>
+        <span><strong>Business World Model</strong><small>Decision intelligence workspace</small></span>
+      </a>
+      <div class="top-context" aria-label="Model context">
+        <span class="status-dot"></span>
+        <span>North America GTM</span>
+        <span class="divider" aria-hidden="true"></span>
+        <span>Updated 09:42</span>
+        <span class="source-pill">18 sources</span>
+      </div>
+      <div class="top-actions">
+        <a class="quiet-link" href="../design-system/">Design system</a>
+        <button class="icon-button" aria-label="Open command palette" title="Command palette"><span aria-hidden="true">⌘</span>K</button>
+      </div>
+    </header>
+
+    <nav class="sidebar" aria-label="Primary">
+      <button class="nav-item is-active" aria-current="page"><span class="nav-icon">◎</span><span>World</span></button>
+      <button class="nav-item"><span class="nav-icon">↗</span><span>Runtime</span></button>
+      <button class="nav-item"><span class="nav-icon">◇</span><span>Scenarios</span></button>
+      <button class="nav-item"><span class="nav-icon">≡</span><span>Evidence</span></button>
+      <div class="nav-spacer"></div>
+      <a class="nav-item nav-link" href="../DESIGN.md"><span class="nav-icon">Aa</span><span>Design</span></a>
+    </nav>
+
+    <main class="workspace" id="workspace">
+      <section class="context-header" aria-labelledby="page-title">
+        <div>
+          <div class="eyebrow">WORLD / REVENUE OPERATIONS</div>
+          <h1 id="page-title">How does pipeline coverage affect Q4 revenue?</h1>
+          <p>Observed business state, modeled causal relationships, and scenario outcomes in one inspectable view.</p>
+        </div>
+        <div class="context-actions">
+          <div class="scenario-switch" role="group" aria-label="Scenario">
+            <button class="scenario-button" data-scenario="baseline">Baseline</button>
+            <button class="scenario-button is-active" data-scenario="plan">Plan</button>
+            <button class="scenario-button" data-scenario="downside">Downside</button>
+          </div>
+          <button class="primary-action" id="run-scenario">Run scenario</button>
+        </div>
+      </section>
+
+      <section class="signal-strip" aria-label="Current signals">
+        <div class="signal"><span>Q4 revenue forecast</span><strong id="forecast-value">$48.6M</strong><small id="forecast-delta">+6.1% vs baseline</small></div>
+        <div class="signal"><span>Pipeline coverage</span><strong>3.1×</strong><small class="warning-text">0.4× below target</small></div>
+        <div class="signal"><span>Model confidence</span><strong>82%</strong><small>High evidence coverage</small></div>
+        <div class="signal signal-provenance"><span>Provenance</span><strong>Salesforce + Snowflake</strong><small>Observed through Sep 15, 2026</small></div>
+      </section>
+
+      <section class="model-panel" aria-labelledby="model-heading">
+        <div class="panel-header">
+          <div>
+            <span class="section-kicker">CAUSAL MODEL</span>
+            <h2 id="model-heading">Revenue system</h2>
+          </div>
+          <div class="legend" aria-label="State legend">
+            <span><i class="legend-dot observed"></i>Observed</span>
+            <span><i class="legend-dot inferred"></i>Inferred</span>
+            <span><i class="legend-line simulated"></i>Simulated</span>
+          </div>
+          <div class="canvas-tools" aria-label="Canvas tools">
+            <button aria-label="Fit model">Fit</button>
+            <button aria-label="Zoom out">−</button>
+            <button aria-label="Zoom in">+</button>
+          </div>
+        </div>
+
+        <div class="model-canvas" id="model-canvas">
+          <svg class="connections" viewBox="0 0 1000 520" role="img" aria-label="Causal connections between business entities" preserveAspectRatio="none">
+            <defs>
+              <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z"></path></marker>
+              <marker id="arrowSim" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z"></path></marker>
+            </defs>
+            <path class="edge" d="M175 150 C265 150, 270 110, 365 110" marker-end="url(#arrow)"></path>
+            <path class="edge" d="M175 360 C265 360, 275 205, 365 205" marker-end="url(#arrow)"></path>
+            <path class="edge" d="M495 110 C590 110, 585 165, 680 165" marker-end="url(#arrow)"></path>
+            <path class="edge" d="M495 205 C590 205, 590 190, 680 190" marker-end="url(#arrow)"></path>
+            <path class="edge" d="M495 325 C590 325, 585 220, 680 220" marker-end="url(#arrow)"></path>
+            <path class="edge simulated-edge" d="M805 190 C880 190, 885 310, 930 310" marker-end="url(#arrowSim)"></path>
+            <text x="248" y="132">drives</text>
+            <text x="548" y="139">influences</text>
+            <text x="827" y="237">scenario</text>
+          </svg>
+
+          <button class="entity-node observed-node" data-entity="pipeline" style="--x:5%;--y:19%">
+            <span class="node-kind">OBSERVED</span><strong>Qualified pipeline</strong><span class="node-value">$72.4M</span><small>Salesforce · 09:38</small>
+          </button>
+          <button class="entity-node observed-node" data-entity="capacity" style="--x:5%;--y:60%">
+            <span class="node-kind">OBSERVED</span><strong>Sales capacity</strong><span class="node-value">148 AEs</span><small>Workday · Sep 15</small>
+          </button>
+          <button class="entity-node inferred-node" data-entity="coverage" style="--x:36%;--y:11%">
+            <span class="node-kind">INFERRED · 91%</span><strong>Pipeline coverage</strong><span class="node-value">3.1×</span><small>Model · 7 signals</small>
+          </button>
+          <button class="entity-node inferred-node" data-entity="conversion" style="--x:36%;--y:30%">
+            <span class="node-kind">INFERRED · 86%</span><strong>Win probability</strong><span class="node-value">27.8%</span><small>Model · 12 cohorts</small>
+          </button>
+          <button class="entity-node observed-node" data-entity="renewal" style="--x:36%;--y:55%">
+            <span class="node-kind">OBSERVED</span><strong>Renewal base</strong><span class="node-value">$18.9M</span><small>Snowflake · 09:41</small>
+          </button>
+          <button class="entity-node outcome-node is-selected" data-entity="revenue" style="--x:68%;--y:25%">
+            <span class="node-kind">OUTCOME</span><strong>Q4 revenue</strong><span class="node-value" id="node-forecast">$48.6M</span><small id="node-forecast-note">Plan scenario</small>
+          </button>
+          <button class="entity-node simulated-node" data-entity="headcount" style="--x:86%;--y:58%">
+            <span class="node-kind">SIMULATION</span><strong>+12 enterprise AEs</strong><span class="node-value" id="headcount-impact">+$2.8M</span><small>90-day horizon</small>
+          </button>
+        </div>
+      </section>
+
+      <section class="analysis-row">
+        <article class="causal-path" aria-labelledby="causal-title">
+          <div class="section-kicker">WHY THIS CHANGES</div>
+          <h2 id="causal-title">Strongest causal path</h2>
+          <ol>
+            <li><span class="step-number">01</span><div><strong>Enterprise pipeline grows</strong><small>+$11.2M qualified opportunity value</small></div><span class="step-impact positive">+4.8%</span></li>
+            <li><span class="step-number">02</span><div><strong>Coverage improves</strong><small>3.1× → 3.6× against target segment</small></div><span class="step-impact positive">+3.1%</span></li>
+            <li><span class="step-number">03</span><div><strong>Q4 revenue responds</strong><small>Median outcome across modeled range</small></div><span class="step-impact positive" id="causal-impact">+$2.8M</span></li>
+          </ol>
+        </article>
+
+        <article class="evidence-panel" aria-labelledby="evidence-title">
+          <div class="section-kicker">EVIDENCE</div>
+          <h2 id="evidence-title">What supports this model</h2>
+          <div class="evidence-item"><span class="evidence-icon">S</span><div><strong>Opportunity history</strong><small>Salesforce · 24 months · 98% fresh</small></div><span class="quality high">High</span></div>
+          <div class="evidence-item"><span class="evidence-icon">D</span><div><strong>Revenue actuals</strong><small>Snowflake · Finance mart · 100% reconciled</small></div><span class="quality high">High</span></div>
+          <div class="evidence-item"><span class="evidence-icon">M</span><div><strong>Segment conversion prior</strong><small>Model inference · last recalibrated Sep 12</small></div><span class="quality medium">Medium</span></div>
+        </article>
+      </section>
+    </main>
+
+    <aside class="inspector" aria-label="Selected entity inspector">
+      <div class="inspector-head">
+        <div><span class="section-kicker">ENTITY INSPECTOR</span><h2 id="inspector-title">Q4 revenue</h2></div>
+        <button class="close-inspector" aria-label="Close inspector">×</button>
+      </div>
+      <div class="entity-type" id="inspector-type">Outcome · Revenue metric</div>
+      <div class="inspector-value" id="inspector-value">$48.6M</div>
+      <div class="change-row"><span id="inspector-change">+$2.8M vs baseline</span><small>Plan scenario</small></div>
+
+      <dl class="metadata">
+        <div><dt>State</dt><dd id="inspector-state"><span class="state-badge simulated-state">Simulated</span></dd></div>
+        <div><dt>Confidence</dt><dd id="inspector-confidence">82%</dd></div>
+        <div><dt>Time scope</dt><dd id="inspector-time">Q4 FY26</dd></div>
+        <div><dt>Source</dt><dd id="inspector-source">Revenue model v7</dd></div>
+      </dl>
+
+      <section class="inspector-section">
+        <h3>Definition</h3>
+        <p id="inspector-definition">Expected recognized revenue for Q4 under the selected operating scenario, including new business and renewals.</p>
+      </section>
+
+      <section class="inspector-section">
+        <div class="section-heading-row"><h3>Recent evidence</h3><button>View all</button></div>
+        <ul class="evidence-list" id="inspector-evidence">
+          <li><span></span><div>Pipeline snapshot<small>Salesforce · 4 min ago</small></div></li>
+          <li><span></span><div>Revenue actuals<small>Snowflake · 1 min ago</small></div></li>
+          <li><span class="inferred-dot"></span><div>Conversion prior<small>Model v7 · 3 days ago</small></div></li>
+        </ul>
+      </section>
+
+      <section class="inspector-section">
+        <h3>Model note</h3>
+        <p class="model-note">The plan scenario assumes enterprise hiring lands by Oct 7 and pipeline creation holds within the observed 8-week range.</p>
+      </section>
+
+      <button class="secondary-action">Open full lineage</button>
+    </aside>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">Scenario recalculated from current evidence.</div>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
