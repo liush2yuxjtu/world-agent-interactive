@@ -4,7 +4,7 @@ import path from 'node:path';
 import {parseTokens} from '../design-system/src/tokens.mjs';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..'),out=path.join(root,'dist');
 await rm(out,{recursive:true,force:true});await mkdir(out,{recursive:true});
-for(const name of ['index.html','src','design-system','references','.nojekyll'])await cp(path.join(root,name),path.join(out,name),{recursive:true});
+for(const name of ['index.html','src','app','design-system','references','.nojekyll'])await cp(path.join(root,name),path.join(out,name),{recursive:true});
 const tokens=parseTokens(await readFile(path.join(out,'src/tokens.css'),'utf8'));
 await writeFile(path.join(out,'tokens.manifest.json'),JSON.stringify({source:'src/tokens.css',count:tokens.length,tokens},null,2));
 console.log(`Built dist/ — ${tokens.length} tokens, external CSS + ES modules, zero runtime dependencies.`);

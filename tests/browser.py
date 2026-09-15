@@ -1,15 +1,19 @@
 """Run the real multi-file project via HTTP. OFFLINE_FIXTURE=1 is an explicit,
 limited in-memory fallback for managed environments that block URL navigation.
 """
-import json,os,re,shutil,subprocess,time,urllib.request,hashlib
+import json,os,re,shutil,subprocess,time,urllib.request,hashlib,struct
 from pathlib import Path
 from playwright.sync_api import sync_playwright,expect
 ROOT=Path(__file__).resolve().parents[1]
 QA=ROOT/'docs/qa';QA.mkdir(parents=True,exist_ok=True)
 OFFLINE=os.environ.get('OFFLINE_FIXTURE')=='1'
 URL=os.environ.get('BASE_URL','http://127.0.0.1:4173/design-system/')
+PRODUCT_URL=URL.replace('/design-system/','/')
 server=None;checks=[]
 before=hashlib.sha256((ROOT/'src/tokens.css').read_bytes()).hexdigest()
+reference=(ROOT/'references/world-agent-reference.png').read_bytes()
+assert reference[:8]==b'\x89PNG\r\n\x1a\n'
+assert struct.unpack('>II',reference[16:24])==(1536,1024)
 def passed(name):checks.append({'name':name,'status':'passed'});print('PASS',name,flush=True)
 if not OFFLINE and not os.environ.get('BASE_URL'):
     server=subprocess.Popen(['node','scripts/dev.mjs'],cwd=ROOT,stdout=subprocess.DEVNULL)
@@ -144,6 +148,37 @@ try:
             page.screenshot(path=str(QA/f'08-inspector-{width}px.png'))
             page.keyboard.press('Escape');expect(page.locator('.ds-inspector')).not_to_be_visible()
             passed(f'{width}px responsive layout has no page overflow and inspector drawer opens/closes')
+        if not OFFLINE:
+            page.set_viewport_size({'width':1440,'height':1050})
+            page.goto(PRODUCT_URL,wait_until='domcontentloaded')
+            expect(page.get_by_role('heading',name='让每一个真实的市场决策， 先在数字世界里发生一次。')).to_be_visible()
+            assert page.evaluate('document.documentElement.scrollWidth')==1440
+            page.screenshot(path=str(QA/'09-product-landing-desktop.png'),full_page=True)
+            passed('Product landing page renders at a real HTTP origin without desktop overflow')
+            page.get_by_role('link',name='立即体验').click()
+            expect(page.get_by_role('heading',name='新品上市模拟',exact=True)).to_be_visible()
+            expect(page.locator('.scheme-card')).to_have_count(3)
+            page.screenshot(path=str(QA/'10-product-workspace-desktop.png'),full_page=True)
+            passed('Landing CTA opens the multi-file experiment workspace with three live schemes')
+            page.locator('[data-step="1"]').click()
+            expect(page.get_by_role('heading',name='谁会看到并购买这款产品？')).to_be_visible()
+            page.locator('[data-step="4"]').click()
+            page.locator('[data-action="run"]').last.click()
+            expect(page.locator('#run-dialog progress')).to_be_visible()
+            page.wait_for_timeout(1600)
+            expect(page.locator('#run-dialog')).to_contain_text('仿真完成')
+            page.get_by_role('button',name='查看结果').click()
+            page.get_by_role('tab',name='人群分析').click()
+            expect(page.locator('.alternate-result')).to_contain_text('25–34 岁')
+            passed('Five-step experiment path runs a simulation and switches result evidence')
+            page.set_viewport_size({'width':390,'height':844})
+            page.reload(wait_until='domcontentloaded')
+            assert page.evaluate('document.documentElement.scrollWidth')<=390
+            page.get_by_role('button',name='打开导航').click()
+            expect(page.locator('.app-sidebar')).to_be_visible()
+            page.screenshot(path=str(QA/'11-product-workspace-mobile.png'),full_page=True)
+            passed('Product workspace has no mobile overflow and exposes its navigation drawer')
+            passed('Golden reference is a versioned 1536 × 1024 PNG used for visual review')
         assert errors==[],errors
         passed('No uncaught JavaScript errors throughout the workflow')
         browser.close()

@@ -1,10 +1,10 @@
-# World Agent · Design System
+# World Agent · Product Demo + Design System
 
-A proper, multi-file frontend project for exploring the actual World Agent `src/tokens.css`.
+A multi-file World Agent frontend with a Chinese product landing page, a click-through market-simulation workspace, and a live explorer for the shared `src/tokens.css`.
 
-**Open the app:** [Design System Explorer](https://liush2yuxjtu.github.io/world-agent-interactive/design-system/)
+**Open the product:** [World Agent](https://liush2yuxjtu.github.io/world-agent-interactive/) · [Experiment workspace](https://liush2yuxjtu.github.io/world-agent-interactive/app/) · [Design System Explorer](https://liush2yuxjtu.github.io/world-agent-interactive/design-system/)
 
-This is not a self-contained HTML mockup. It has a development server with live reload, separate ES modules and stylesheets, shared component primitives, a production build, unit tests, browser tests, and CI. The earlier standalone marketing/workspace demo has not been migrated into this repository; this project is the new design-system explorer.
+This is a real frontend project rather than a self-contained HTML mockup. It has a development server with live reload, separate ES modules and stylesheets, shared design tokens, a production build, browser-tested interactions, and CI. Product numbers and simulation output are clearly labeled demo data.
 
 ## Run locally
 
@@ -16,7 +16,7 @@ cd world-agent-interactive
 npm run dev
 ```
 
-Open `http://127.0.0.1:4173/design-system/`. Edit `src/tokens.css`; the local page reloads automatically. The `file://` protocol is not supported: the app deliberately fetches its shared stylesheet over HTTP.
+Open `http://127.0.0.1:4173/` for the landing page, `/app/` for the experiment workspace, or `/design-system/` for the token explorer. Editing `src/tokens.css` reloads every surface automatically. The `file://` protocol is not supported because the explorer fetches its shared stylesheet over HTTP.
 
 ```bash
 npm test          # pure token / component unit tests
@@ -47,11 +47,14 @@ The Accessibility page evaluates seven explicit foreground/background pairs. Opa
 ```text
 world-agent-interactive/
 ├── package.json
-├── index.html                    # routes to the explorer
+├── index.html                    # Chinese product landing page
+├── app/                          # click-through experiment workspace
 ├── src/
 │   ├── tokens.css                # original World Agent token values
 │   ├── components.css            # shared token-driven UI primitives
 │   ├── components.mjs            # safe component render helpers
+│   ├── marketing.css             # landing-page layout and responsive rules
+│   ├── marketing.mjs             # landing-page interactions
 │   └── icons.mjs                 # local inline SVG icon library
 ├── design-system/
 │   ├── index.html                # app entry; external CSS and JS
@@ -64,6 +67,7 @@ world-agent-interactive/
 ├── scripts/                      # local server and production build
 ├── tests/                        # unit tests and Playwright browser QA
 ├── docs/DESIGN_SYSTEM.md          # audit, component contract, governance
+├── docs/PRODUCT_PATTERNS.md       # product patterns, states, accessibility
 └── .github/workflows/ci.yml       # build + browser QA and snapshots
 ```
 

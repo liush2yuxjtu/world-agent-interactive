@@ -74,4 +74,4 @@ The included tests assert the original 63-token baseline. When intentionally add
 
 ## Scope boundary
 
-This commit delivers the design-system project. It does not migrate or publish the earlier standalone landing/workspace demo, provide a real simulation engine, authenticate users, or synchronize drafts across browsers. The standalone QA fixture exists only to inspect visuals inside restricted execution environments; it is excluded from the production build.
+The shared system now powers the landing page, experiment workspace, and design-system explorer. The product surfaces are a deterministic click-through demonstration: they do not provide a predictive simulation engine, authenticate users, or persist experiment data remotely. Design-token drafts remain local to the explorer browser. The standalone QA fixture exists only for restricted execution environments and is excluded from the production build.
