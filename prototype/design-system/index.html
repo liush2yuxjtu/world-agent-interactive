@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#315dff">
+  <meta name="description" content="The living design language of World Agent. Inspect, preview, and experiment with the actual tokens.css.">
+  <title>World Agent · Design System</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../src/tokens.css">
+  <link rel="stylesheet" href="../src/components.css">
+  <link rel="stylesheet" href="./src/explorer.css">
+</head>
+<body>
+  <a class="ds-skip" href="#main-content">Skip to content</a>
+  <div id="app"><main class="ds-boot"><span class="ds-boot-mark">W</span><h1>Loading your design language…</h1><p>Reading the shared tokens.css.</p></main></div>
+  <noscript>This explorer needs JavaScript. The source tokens remain available in src/tokens.css.</noscript>
+  <div id="dialog-root"></div>
+  <div id="toast-root" role="status" aria-live="polite"></div>
+  <script type="module" src="./src/app.mjs"></script>
+</body>
+</html>

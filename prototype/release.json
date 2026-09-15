@@ -1,0 +1,7 @@
+{
+  "version": "clickthrough-2026-09-15",
+  "sourceCommit": "84e60cd8e5daa0bb24303faf9668aef73cf2681b",
+  "reference": "../references/world-agent-reference.png",
+  "mode": "static-demo",
+  "data": "uncalibrated-fixtures"
+}
