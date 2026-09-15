@@ -1,0 +1,46 @@
+name: Reference review
+on:
+  push:
+    branches: [fix/reference-alignment-v2]
+  pull_request:
+    paths: ['src/**', 'app/**', 'public/**', 'scripts/**', '.github/workflows/reference-review.yml']
+permissions:
+  contents: read
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Package reproducible source
+        uses: actions/upload-artifact@v4
+        with:
+          name: reference-review-source
+          path: |
+            .
+            !.git/**
+          include-hidden-files: true
+          retention-days: 7
+      - name: Build and test
+        run: npm run check
+      - name: Render reference evidence when implemented
+        run: |
+          if [ -f scripts/reference_review.py ]; then
+            python -m pip install playwright pillow opencv-python-headless scikit-image
+            python -m playwright install --with-deps chromium
+            python scripts/reference_review.py
+          fi
+      - name: Upload screenshots and differences
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reference-review-evidence
+          path: docs/qa/reference-v2/
+          if-no-files-found: ignore
+          retention-days: 14
