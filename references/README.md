@@ -4,11 +4,12 @@ This directory contains the golden visual reference for the World Agent landing 
 
 ## Golden reference
 
-- `world-agent-reference.jpg` — primary UI reference supplied for the project and stored in Git.
+- `world-agent-reference.png` — full-resolution primary UI reference supplied for the project.
+- `world-agent-reference.jpg` — lightweight preview retained for quick browsing.
 
 ## Usage
 
-Treat this image as the visual baseline for implementation and review. Compare future landing-page and app screenshots against it before accepting design changes.
+Treat the PNG as the canonical visual baseline for implementation and review. Compare future landing-page and app screenshots against it before accepting design changes.
 
 Only replace the golden reference when there is an explicit design decision to update the baseline. Do not overwrite it as a side effect of routine implementation work.
 
