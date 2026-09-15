@@ -1,0 +1,191 @@
+{
+  "baseline_commit": "7905fad3f6b2777fbe1467e126d84e6e18a7ee55",
+  "review_input_commit": "7a6ff2b79c56e45657c5c40ff1bed571ad1fa781",
+  "rendering": "Chromium, real local HTTP origins, device scale factor 1",
+  "method": "Reference split at x=800. Landing 800x1024 and dashboard 736x1024. No resize, alignment warp, masking, or score normalization beyond division by 255. All text and controls remain DOM; illustration differences remain.",
+  "captures": {
+    "before-landing": {
+      "width": 800,
+      "scrollWidth": 800,
+      "height": 3522,
+      "images": [],
+      "pageErrors": []
+    },
+    "before-app": {
+      "width": 736,
+      "scrollWidth": 736,
+      "height": 2208,
+      "images": [],
+      "pageErrors": []
+    },
+    "before-landing-desktop": {
+      "width": 1440,
+      "scrollWidth": 1440,
+      "height": 2527,
+      "images": [],
+      "pageErrors": []
+    },
+    "before-app-desktop": {
+      "width": 1440,
+      "scrollWidth": 1440,
+      "height": 1275,
+      "images": [],
+      "pageErrors": []
+    },
+    "before-landing-mobile": {
+      "width": 390,
+      "scrollWidth": 414,
+      "height": 4532,
+      "images": [],
+      "pageErrors": []
+    },
+    "before-app-mobile": {
+      "width": 390,
+      "scrollWidth": 390,
+      "height": 3127,
+      "images": [],
+      "pageErrors": []
+    },
+    "after-landing": {
+      "width": 800,
+      "scrollWidth": 800,
+      "height": 1086,
+      "images": [
+        {
+          "src": "public/assets/visual-v2/hero-world.avif",
+          "loaded": true,
+          "width": 720,
+          "height": 540
+        },
+        {
+          "src": "public/assets/visual-v2/consumer-community.avif",
+          "loaded": true,
+          "width": 600,
+          "height": 450
+        }
+      ],
+      "pageErrors": []
+    },
+    "after-app": {
+      "width": 736,
+      "scrollWidth": 736,
+      "height": 1024,
+      "images": [
+        {
+          "src": "../public/assets/visual-v2/peach-sparkling-water.avif",
+          "loaded": true,
+          "width": 360,
+          "height": 480
+        }
+      ],
+      "pageErrors": []
+    },
+    "after-landing-desktop": {
+      "width": 1440,
+      "scrollWidth": 1440,
+      "height": 1647,
+      "images": [
+        {
+          "src": "public/assets/visual-v2/hero-world.avif",
+          "loaded": true,
+          "width": 720,
+          "height": 540
+        },
+        {
+          "src": "public/assets/visual-v2/consumer-community.avif",
+          "loaded": true,
+          "width": 600,
+          "height": 450
+        }
+      ],
+      "pageErrors": []
+    },
+    "after-app-desktop": {
+      "width": 1440,
+      "scrollWidth": 1440,
+      "height": 1295,
+      "images": [
+        {
+          "src": "../public/assets/visual-v2/peach-sparkling-water.avif",
+          "loaded": true,
+          "width": 360,
+          "height": 480
+        }
+      ],
+      "pageErrors": []
+    },
+    "after-landing-mobile": {
+      "width": 390,
+      "scrollWidth": 390,
+      "height": 2051,
+      "images": [
+        {
+          "src": "public/assets/visual-v2/hero-world.avif",
+          "loaded": true,
+          "width": 720,
+          "height": 540
+        },
+        {
+          "src": "public/assets/visual-v2/consumer-community.avif",
+          "loaded": true,
+          "width": 600,
+          "height": 450
+        }
+      ],
+      "pageErrors": []
+    },
+    "after-app-mobile": {
+      "width": 390,
+      "scrollWidth": 390,
+      "height": 2396,
+      "images": [
+        {
+          "src": "../public/assets/visual-v2/peach-sparkling-water.avif",
+          "loaded": true,
+          "width": 360,
+          "height": 480
+        }
+      ],
+      "pageErrors": []
+    }
+  },
+  "checks": [
+    "All four shipped AVIFs decode at expected dimensions",
+    "No horizontal overflow at reference, desktop or mobile widths",
+    "No JavaScript page errors",
+    "Scenario selection changes example KPI",
+    "Audience and runtime steps open",
+    "Example-run dialog completes and closes",
+    "Landing CTA navigates to app over HTTP"
+  ],
+  "metrics": {
+    "landing": {
+      "before": {
+        "normalized_mae": 0.21285398304462433,
+        "normalized_rmse": 0.3394022285938263,
+        "ssim": 0.43616074277053146,
+        "edge_iou": 0.022549346987236568
+      },
+      "after": {
+        "normalized_mae": 0.14287663996219635,
+        "normalized_rmse": 0.25853386521339417,
+        "ssim": 0.4428356961415817,
+        "edge_iou": 0.09582095150168778
+      }
+    },
+    "app": {
+      "before": {
+        "normalized_mae": 0.12412229925394058,
+        "normalized_rmse": 0.2701898515224457,
+        "ssim": 0.5569822706535689,
+        "edge_iou": 0.019901422858737097
+      },
+      "after": {
+        "normalized_mae": 0.06968999654054642,
+        "normalized_rmse": 0.18327564001083374,
+        "ssim": 0.6059984336153577,
+        "edge_iou": 0.08254883964861676
+      }
+    }
+  }
+}
