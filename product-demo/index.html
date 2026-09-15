@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#315dff"><meta name="description" content="World Agent 产品演示：建立实验、运行可复现的规则模拟、查看独立报告与合成消费者轨迹。">
+<title>实验中心 · World Agent</title>
+<link rel="icon" href="../design-system/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../src/tokens.css"><link rel="stylesheet" href="app.css">
+</head>
+<body>
+<a class="skip" href="#content">跳到主要内容</a>
+<aside class="sidebar" id="sidebar">
+<a class="brand" href="../"><svg viewBox="0 0 48 32" aria-hidden="true"><path d="M4 5 13 27 24 5l10 22L44 5"/></svg><span>World Agent<small>赢销通 · 消费者世界</small></span></a>
+<div class="workspace-label">个人演示工作区 <span>LOCAL</span></div>
+<nav aria-label="工作区导航"><a href="#/experiments" data-nav="experiments">▦ <span>实验中心</span></a><a href="#/setup/1" data-nav="setup">⊕ <span>实验设置</span></a><a href="#/reports" data-nav="reports">▤ <span>结果报告</span></a></nav>
+<div class="sidebar-bottom"><div class="local-note"><b>数据留在你的浏览器</b><p>无需登录。此版本没有云同步，也不会上传实验数据。</p></div><a href="../eli5/">使用说明 ↗</a><a href="../design-system/">设计系统 ↗</a><a href="../">返回产品官网 ↗</a><span class="version">PRODUCT DEMO · v1.0</span></div>
+</aside>
+<div class="stage"><header class="topbar"><button class="icon-button" id="menu" aria-label="展开导航" aria-controls="sidebar" aria-expanded="false">☰</button><div class="breadcrumb">工作区 <span>/</span> <b id="crumb">实验中心</b></div><div class="top-actions"><span class="save-badge" id="save-state" role="status">本地保存</span><a class="help" href="../eli5/" aria-label="打开使用说明">?</a><span class="identity" title="未登录；本机演示工作区">访</span></div></header><div id="notice" class="notice" hidden role="status"></div><main id="content" tabindex="-1"></main><footer>规则演示 · 不代表真实市场预测 · <a href="../eli5/#limits">能力边界</a></footer></div>
+<dialog id="modal" aria-labelledby="modal-title"><div id="modal-content"></div></dialog><div class="toast" id="toast" role="status" aria-live="polite"></div>
+<input type="file" id="import-file" accept=".json,application/json" hidden>
+<noscript><p>本应用需要 JavaScript 才能运行模拟。<a href="../eli5/">阅读使用说明</a></p></noscript>
+<script type="module" src="app.mjs"></script>
+</body></html>
