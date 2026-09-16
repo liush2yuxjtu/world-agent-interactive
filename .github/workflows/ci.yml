@@ -39,3 +39,11 @@ jobs:
         run: npm run typecheck
       - name: Build Eve app
         run: npm run build
+      - name: Pack validated preview source
+        working-directory: .
+        run: git archive --format=zip --output=eve-app-preview.zip HEAD eve-app
+      - uses: actions/upload-artifact@v4
+        with:
+          name: china-eve-preview-source
+          path: eve-app-preview.zip
+          retention-days: 7
