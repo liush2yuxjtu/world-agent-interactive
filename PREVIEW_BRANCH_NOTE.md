@@ -1,1 +1,0 @@
-Temporary marker for Vercel preview branch. Source commit matches PR #3 redesign branch.
