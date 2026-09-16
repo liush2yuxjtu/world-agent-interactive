@@ -1,6 +1,6 @@
 {
   "name": "business-world-model-eve",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -12,13 +12,16 @@
     "eval": "eve eval",
     "eval:remote": "eve eval --url https://world-agent-eve.vercel.app --strict"
   },
-  "engines": { "node": ">=24" },
+  "engines": {
+    "node": ">=24"
+  },
   "dependencies": {
     "@streamdown/cjk": "1.0.3",
     "@streamdown/code": "1.1.1",
     "@streamdown/math": "1.0.2",
     "@streamdown/mermaid": "1.0.2",
     "ai": "7.0.58",
+    "chat": "4.40.0",
     "clsx": "2.1.1",
     "eve": "^0.31.3",
     "lucide-react": "1.16.0",
