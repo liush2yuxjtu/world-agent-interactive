@@ -38,6 +38,9 @@ jobs:
           node-version: 24
       - name: Install Eve app dependencies
         run: npm install
+      - name: Validate Eve world projection
+        working-directory: .
+        run: node --test tests/eve-world-projection.test.mts
       - name: Typecheck Eve app
         run: npm run typecheck
       - name: Build Eve app
