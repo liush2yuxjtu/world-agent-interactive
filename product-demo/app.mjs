@@ -1,3 +1,4 @@
+import '../src/posthog.mjs';
 import {defaultConfig,cleanConfig,validateConfig,escapeHtml as e,csvReport,CHANNELS,MESSAGES,MODEL_VERSION} from './model.mjs';
 import {loadStore,saveStore,LIMIT} from './store.mjs';
 const $=s=>document.querySelector(s),main=$('#content'),modal=$('#modal');

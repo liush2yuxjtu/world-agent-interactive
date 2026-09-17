@@ -1,3 +1,4 @@
+import './posthog.mjs';
 const header=document.querySelector('[data-header]');
 const toast=document.querySelector('.wa-toast');
 const modal=document.querySelector('#product-video');
