@@ -1,0 +1,3 @@
+import Link from "next/link";
+const items = [["/","总览","⌂"],["/world","世界模型","◎"],["/scenarios","场景推演","◇"],["/experiments","实验","↗"],["/evidence","证据","≡"],["/history","历史","◷"]] as const;
+export function AppSidebar({ active = "/" }: { active?: string }) { return <nav className="app-sidebar" aria-label="商业世界主导航"><div className="product-mark"><span>世</span><div><strong>商业世界</strong><small>Business World</small></div></div><div className="nav-items">{items.map(([href,label,icon]) => <Link aria-current={active===href ? "page" : undefined} className={active===href ? "is-active" : ""} href={href} key={href}><i>{icon}</i><span>{label}</span></Link>)}</div><div className="nav-footer"><span>模型状态</span><b><i /> Eve runtime</b></div></nav>; }

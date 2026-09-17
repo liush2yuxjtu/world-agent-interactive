@@ -1,5 +1,2 @@
-import { EveChat } from "@/components/eve-chat";
-
-export default function AssistantPage() {
-  return <EveChat />;
-}
+import { redirect } from "next/navigation";
+export default function AssistantPage(){ redirect("/"); }
