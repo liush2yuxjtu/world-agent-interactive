@@ -1,6 +1,34 @@
 import type { ExperimentProjection } from "@/lib/world/types";
+import type { ScenarioName } from "@/components/world/scenario-tabs";
 
-export function MetricStrip({ projection }: { projection: ExperimentProjection | null }) {
+const scenarioMetrics: Record<ScenarioName, Array<[string, string, string]>> = {
+  基准: [
+    ["Q4 收入示例", "¥3.46 亿", "演示基准"],
+    ["商机覆盖", "3.1×", "目标 3.5×"],
+    ["成交概率", "27.8%", "模型推断"],
+    ["证据覆盖", "82%", "18 个演示来源"],
+  ],
+  增长: [
+    ["Q4 收入示例", "¥3.83 亿", "场景模拟 +10.7%"],
+    ["商机覆盖", "3.7×", "场景模拟"],
+    ["成交概率", "30.4%", "场景模拟"],
+    ["证据覆盖", "82%", "18 个演示来源"],
+  ],
+  下行: [
+    ["Q4 收入示例", "¥3.08 亿", "场景模拟 -11.0%"],
+    ["商机覆盖", "2.6×", "场景模拟"],
+    ["成交概率", "24.1%", "场景模拟"],
+    ["证据覆盖", "82%", "18 个演示来源"],
+  ],
+};
+
+export function MetricStrip({
+  projection,
+  scenario,
+}: {
+  projection: ExperimentProjection | null;
+  scenario: ScenarioName;
+}) {
   if (projection) {
     const [a, b] = projection.scenarios;
     return <section className="metric-strip" aria-label="实验结果指标">
@@ -10,10 +38,12 @@ export function MetricStrip({ projection }: { projection: ExperimentProjection |
       <div><span>模型状态</span><strong>未校准</strong><small>{projection.status || "完成"}</small></div>
     </section>;
   }
-  return <section className="metric-strip" aria-label="业务基准指标">
-    <div><span>Q4 收入示例</span><strong>¥3.46 亿</strong><small>演示基准</small></div>
-    <div><span>商机覆盖</span><strong>3.1×</strong><small>目标 3.5×</small></div>
-    <div><span>成交概率</span><strong>27.8%</strong><small>模型推断</small></div>
-    <div><span>证据覆盖</span><strong>82%</strong><small>18 个演示来源</small></div>
-  </section>;
+
+  return (
+    <section className="metric-strip" aria-label={`${scenario}场景指标`}>
+      {scenarioMetrics[scenario].map(([label, value, detail]) => (
+        <div key={label}><span>{label}</span><strong>{value}</strong><small>{detail}</small></div>
+      ))}
+    </section>
+  );
 }
