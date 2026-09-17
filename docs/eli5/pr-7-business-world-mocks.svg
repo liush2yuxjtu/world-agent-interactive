@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">PR #7 中文 ELI5：给商业世界测试装上一套安全替身</title>
+  <desc id="desc">五步图：测试请求进入统一 Mock Harness，再由数据库、网络、时间、存储和审批替身支持完整 Eve 实验流程，生产代码和真实服务保持不变。</desc>
+  <rect width="1200" height="720" fill="#f7f7f4"/>
+  <text x="70" y="80" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="38" font-weight="700" fill="#171717">PR #7：给商业世界测试装上一套“安全替身”</text>
+  <text x="70" y="120" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="20" fill="#5f6368">一句话：测试可以演练成功、失败、拒绝、超时，不碰真实外部服务。</text>
+
+  <g font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif">
+    <rect x="70" y="175" width="190" height="180" rx="22" fill="#ffffff" stroke="#202124" stroke-width="2"/>
+    <circle cx="105" cy="210" r="20" fill="#2f6fed"/>
+    <text x="105" y="217" text-anchor="middle" font-size="20" font-weight="700" fill="#ffffff">1</text>
+    <text x="95" y="260" font-size="24" font-weight="700" fill="#171717">测试发请求</text>
+    <path d="M115 300 h70" stroke="#2f6fed" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="195" cy="300" r="10" fill="#2f6fed"/>
+    <text x="95" y="330" font-size="17" fill="#5f6368">同一种蓝色请求继续向右</text>
+
+    <path d="M270 265 H315" stroke="#2f6fed" stroke-width="8" stroke-linecap="round"/>
+    <path d="M305 253 L320 265 L305 277" fill="none" stroke="#2f6fed" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <rect x="330" y="175" width="250" height="180" rx="22" fill="#eef3ff" stroke="#2f6fed" stroke-width="3"/>
+    <circle cx="365" cy="210" r="20" fill="#2f6fed"/>
+    <text x="365" y="217" text-anchor="middle" font-size="20" font-weight="700" fill="#ffffff">2</text>
+    <text x="355" y="260" font-size="24" font-weight="700" fill="#171717">统一 Mock Harness</text>
+    <rect x="355" y="286" width="90" height="34" rx="17" fill="#ffffff" stroke="#2f6fed"/>
+    <text x="400" y="309" text-anchor="middle" font-size="16" fill="#2f6fed">一次创建</text>
+    <rect x="455" y="286" width="95" height="34" rx="17" fill="#ffffff" stroke="#2f6fed"/>
+    <text x="502" y="309" text-anchor="middle" font-size="16" fill="#2f6fed">一次 reset</text>
+
+    <path d="M590 265 H635" stroke="#2f6fed" stroke-width="8" stroke-linecap="round"/>
+    <path d="M625 253 L640 265 L625 277" fill="none" stroke="#2f6fed" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <rect x="650" y="175" width="480" height="180" rx="22" fill="#ffffff" stroke="#202124" stroke-width="2"/>
+    <circle cx="685" cy="210" r="20" fill="#2f6fed"/>
+    <text x="685" y="217" text-anchor="middle" font-size="20" font-weight="700" fill="#ffffff">3</text>
+    <text x="675" y="255" font-size="24" font-weight="700" fill="#171717">把外部世界换成可控替身</text>
+    <g font-size="17" fill="#171717">
+      <rect x="675" y="278" width="76" height="42" rx="12" fill="#f2f4f7" stroke="#b7bcc5"/><text x="713" y="305" text-anchor="middle">数据库</text>
+      <rect x="762" y="278" width="76" height="42" rx="12" fill="#f2f4f7" stroke="#b7bcc5"/><text x="800" y="305" text-anchor="middle">网络</text>
+      <rect x="849" y="278" width="76" height="42" rx="12" fill="#f2f4f7" stroke="#b7bcc5"/><text x="887" y="305" text-anchor="middle">时间</text>
+      <rect x="936" y="278" width="76" height="42" rx="12" fill="#f2f4f7" stroke="#b7bcc5"/><text x="974" y="305" text-anchor="middle">存储</text>
+      <rect x="1023" y="278" width="76" height="42" rx="12" fill="#f2f4f7" stroke="#b7bcc5"/><text x="1061" y="305" text-anchor="middle">审批</text>
+    </g>
+
+    <rect x="70" y="405" width="1060" height="165" rx="24" fill="#ffffff" stroke="#202124" stroke-width="2"/>
+    <circle cx="105" cy="440" r="20" fill="#2f6fed"/>
+    <text x="105" y="447" text-anchor="middle" font-size="20" font-weight="700" fill="#ffffff">4</text>
+    <text x="145" y="448" font-size="24" font-weight="700" fill="#171717">完整 Eve 流程照样跑</text>
+    <g font-size="18" font-weight="700">
+      <rect x="145" y="480" width="150" height="52" rx="14" fill="#eef3ff" stroke="#2f6fed"/><text x="220" y="512" text-anchor="middle" fill="#171717">plan</text>
+      <path d="M305 506 H345" stroke="#2f6fed" stroke-width="7" stroke-linecap="round"/><path d="M335 495 L349 506 L335 517" fill="none" stroke="#2f6fed" stroke-width="7"/>
+      <rect x="360" y="480" width="170" height="52" rx="14" fill="#eef3ff" stroke="#2f6fed"/><text x="445" y="512" text-anchor="middle" fill="#171717">批准 / 拒绝</text>
+      <path d="M540 506 H580" stroke="#2f6fed" stroke-width="7" stroke-linecap="round"/><path d="M570 495 L584 506 L570 517" fill="none" stroke="#2f6fed" stroke-width="7"/>
+      <rect x="595" y="480" width="150" height="52" rx="14" fill="#eef3ff" stroke="#2f6fed"/><text x="670" y="512" text-anchor="middle" fill="#171717">run</text>
+      <path d="M755 506 H795" stroke="#2f6fed" stroke-width="7" stroke-linecap="round"/><path d="M785 495 L799 506 L785 517" fill="none" stroke="#2f6fed" stroke-width="7"/>
+      <rect x="810" y="480" width="125" height="52" rx="14" fill="#eef3ff" stroke="#2f6fed"/><text x="872" y="512" text-anchor="middle" fill="#171717">read</text>
+      <path d="M945 506 H985" stroke="#2f6fed" stroke-width="7" stroke-linecap="round"/><path d="M975 495 L989 506 L975 517" fill="none" stroke="#2f6fed" stroke-width="7"/>
+      <rect x="1000" y="480" width="100" height="52" rx="14" fill="#eef3ff" stroke="#2f6fed"/><text x="1050" y="512" text-anchor="middle" fill="#171717">可靠性</text>
+    </g>
+
+    <rect x="70" y="610" width="1060" height="70" rx="20" fill="#171717"/>
+    <circle cx="105" cy="645" r="20" fill="#2f6fed"/>
+    <text x="105" y="652" text-anchor="middle" font-size="20" font-weight="700" fill="#ffffff">5</text>
+    <text x="145" y="652" font-size="22" font-weight="700" fill="#ffffff">结果：失败可重复、网络不外跑、生产代码不改、真实审批不被绕过。</text>
+  </g>
+</svg>
