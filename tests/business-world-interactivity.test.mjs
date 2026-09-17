@@ -27,11 +27,28 @@ test("Business World nodes are selectable and explain themselves", () => {
   assert.match(canvas, /nodeDetails/);
 });
 
-test("command shortcut focuses the real Eve composer", () => {
+test("command shortcut focuses the rendered Eve composer", () => {
   const header = read("eve-app/components/shell/product-header.tsx");
+  const panel = read("eve-app/components/eve/eve-operator-panel.tsx");
 
   assert.match(header, /metaKey \|\| event\.ctrlKey/);
   assert.match(header, /key\.toLowerCase\(\) === "k"/);
-  assert.match(header, /告诉 Eve 你想测试什么/);
+  assert.match(header, /告诉 Eve 你想推演什么/);
+  assert.match(panel, /aria-label="告诉 Eve 你想推演什么"/);
   assert.match(header, /focusEveComposer/);
+});
+
+test("mobile navigation keeps every primary route reachable", () => {
+  const css = read("eve-app/app/globals.css");
+
+  assert.doesNotMatch(css, /\.nav-items a:nth-child\(n\+4\)\{display:none\}/);
+  assert.match(css, /\.nav-items\{display:flex;gap:2px;overflow-x:auto/);
+  assert.match(css, /\.nav-items a\{padding:7px;flex:0 0 auto\}/);
+});
+
+test("tool output preserves valid falsy results", () => {
+  const tool = read("eve-app/components/ai-elements/tool.tsx");
+
+  assert.match(tool, /output === undefined && errorText === undefined/);
+  assert.doesNotMatch(tool, /!\(output \|\| errorText\)/);
 });
