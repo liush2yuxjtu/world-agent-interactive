@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 
 function focusEveComposer() {
-  const input = document.querySelector<HTMLInputElement>('[aria-label="告诉 Eve 你想测试什么"]');
+  const input = document.querySelector<HTMLTextAreaElement>('[aria-label="告诉 Eve 你想推演什么"]');
   input?.focus();
   input?.scrollIntoView({ behavior: "smooth", block: "center" });
 }
