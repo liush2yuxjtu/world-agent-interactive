@@ -23,7 +23,7 @@ export type ToolContentProps = ComponentProps<"div">;
 export const ToolContent = ({ className, ...props }: ToolContentProps) => <div className={cn("ai-tool-content", className)} {...props} />;
 export const ToolInput = ({ input }: { input: ToolPart["input"] }) => <pre className="ai-tool-code">{JSON.stringify(input, null, 2)}</pre>;
 export const ToolOutput = ({ output, errorText }: { output: ToolPart["output"]; errorText?: string }) => {
-  if (!(output || errorText)) return null;
+  if (output === undefined && errorText === undefined) return null;
   const value: ReactNode = typeof output === "string" ? output : <pre>{JSON.stringify(output, null, 2)}</pre>;
   return <div className={cn("ai-tool-output", errorText && "is-error")}>{errorText ?? value}</div>;
 };
