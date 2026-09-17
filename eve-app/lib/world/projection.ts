@@ -4,16 +4,21 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
+function finiteNumber(value: unknown) {
+  const number = Number(value ?? 0);
+  return Number.isFinite(number) ? number : 0;
+}
+
 function normalizeScenario(value: Record<string, unknown>): Scenario {
   return {
     id: String(value.id ?? ""),
-    price: Number(value.price ?? 0),
-    conversion: Number(value.conversion ?? 0),
-    units: Number(value.units ?? 0),
-    repeatRate: Number(value.repeatRate ?? 0),
-    socialReach: Number(value.socialReach ?? 0),
-    revenue: Number(value.revenue ?? 0),
-    netContribution: Number(value.netContribution ?? 0),
+    price: finiteNumber(value.price),
+    conversion: finiteNumber(value.conversion),
+    units: finiteNumber(value.units),
+    repeatRate: finiteNumber(value.repeatRate),
+    socialReach: finiteNumber(value.socialReach),
+    revenue: finiteNumber(value.revenue),
+    netContribution: finiteNumber(value.netContribution),
   };
 }
 
