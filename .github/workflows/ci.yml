@@ -20,11 +20,22 @@ jobs:
       - name: Validate build output
         run: test -f dist/index.html && test -f dist/assistant/index.html
       - name: Validate intent snapshots
-        run: node --test tests/intent-parity.test.mjs tests/eve-chat-intent.test.mjs
+        run: node --test tests/ui-state.test.mjs tests/eve-chat-intent.test.mjs
       - name: Validate HTML (legacy baseline report)
         continue-on-error: true
         run: npx --yes html-validate "dist/**/*.html"
       - run: npm run test:browser
+      - name: Verify Business World UI in Chromium
+        run: python tests/ui_browser.py
+      - name: Enforce UI intent and developer audit status
+        run: node scripts/check-ui-audit.mjs
+      - name: Upload UI audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: business-world-ui-audit
+          path: docs/ui-audit/
+          retention-days: 14
 
   eve-app:
     runs-on: ubuntu-latest

@@ -1,0 +1,25 @@
+{
+  "url": "http://127.0.0.1:62361/ui.html",
+  "commit": "3f29aef5653d17ff9ed3f6d4821bfaea5bf83d94",
+  "workingTree": " M .github/workflows/ci.yml\n M package.json\n M scripts/build.mjs\n M tests/browser.py\n M ui.html\n M ui.md\n?? docs/ui-audit/\n?? scripts/check-ui-audit.mjs\n?? src/ui-report.mjs\n?? src/ui-runtime.mjs\n?? src/ui-state.mjs\n?? src/ui-surfaces.mjs\n?? src/vendor/\n?? tests/run_all_browsers.py\n?? tests/ui-state.test.mjs\n?? tests/ui_browser.py\n",
+  "artifactHashes": {
+    "ui.html": "13477656d6207fa08a2ded3466e5213a3a17bac505036258a8f3772392432511",
+    "ui.md": "44628afaf89864b5b7f95e942d195c2880dadb26555e07051cae8a31f97adeb7",
+    "src/ui-report.mjs": "d14b9c1ed90015d0676a39af10e3d237e252ebe89d84b0d6c18a8a5dc58f804a",
+    "src/ui-runtime.mjs": "5cb5af2ebbefa88124b9b02c6a2003928aeed587e0729a21ff00e444562739a9",
+    "src/ui-state.mjs": "fa148d36a41089fe3a15e1f577e5059e9e7b4174326f8ef4103b4f5d95264ed0",
+    "src/ui-surfaces.mjs": "e9c173b279c19fd2fcea8f8c7f03af79ee5dc82fcf2ea65086adbdc35f2bc073"
+  },
+  "checks": [
+    {
+      "name": "Runtime completion",
+      "status": "FAIL",
+      "evidence": "Traceback (most recent call last):\n  File \"/Users/liushiyu/projects/business-world-ui-audit-20260918/tests/ui_browser.py\", line 48, in <module>\n    browser=p.chromium.launch(headless=True)\n  File \"/opt/homebrew/lib/python3.14/site-packages/playwright/sync_api/_generated.py\", line 14566, in launch\n    self._sync(\n    ~~~~~~~~~~^\n        self._impl_obj.launch(\n        ^^^^^^^^^^^^^^^^^^^^^^\n    ...<16 lines>...\n        )\n        ^\n    )\n    ^\n  File \"/opt/homebrew/lib/python3.14/site-packages/playwright/_impl/_sync_base.py\", line 115, in _sync\n    return task.result()\n           ~~~~~~~~~~~^^\n  File \"/opt/homebrew/lib/python3.14/site-packages/playwright/_impl/_browser_type.py\", line 97, in launch\n    await self._channel.send(\n        \"launch\", TimeoutSettings.launch_timeout, params\n    )\n  File \"/opt/homebrew/lib/python3.14/site-packages/playwright/_impl/_connection.py\", line 69, in send\n    return await self._connection.wrap_api_call(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    ...<3 lines>...\n    )\n    ^\n  File \"/opt/homebrew/lib/python3.14/site-packages/playwright/_impl/_connection.py\", line 559, in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nplaywright._impl._errors.Error: BrowserType.launch: Executable doesn't exist at /Users/liushiyu/Library/Caches/ms-playwright/chromium_headless_shell-1208/chrome-headless-shell-mac-arm64/chrome-headless-shell\n╔════════════════════════════════════════════════════════════╗\n║ Looks like Playwright was just installed or updated.       ║\n║ Please run the following command to download new browsers: ║\n║                                                            ║\n║     playwright install                                     ║\n║                                                            ║\n║ <3 Playwright Team                                         ║\n╚════════════════════════════════════════════════════════════╝\n"
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [],
+  "unexpectedMutations": [],
+  "passed": 0,
+  "failed": 1
+}

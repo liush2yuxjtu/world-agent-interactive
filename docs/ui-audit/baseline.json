@@ -1,0 +1,49 @@
+[
+  {
+    "name": "No unsupported verification claim",
+    "status": "FAIL",
+    "evidence": "✓ VERIFIED PERSISTED SOURCE\n数据源：电商运营数据库（Production）\n提供方：BWA Data Hub\n最后更新：2026-09-18 08:48"
+  },
+  {
+    "name": "Persona selection has no runtime errors",
+    "status": "FAIL",
+    "evidence": [
+      "$(...).forEach is not a function"
+    ]
+  },
+  {
+    "name": "Persona inspector updates",
+    "status": "FAIL",
+    "evidence": "人群详情：新手妈妈 已观测\n\n0-3岁宝宝的年轻妈妈 · “关注宝宝健康与安全，也希望育儿更轻松。”\n\n人群定义\n22-35岁育儿女性\n证据来源\n订单 / 内容 / CRM / 直播\n置信度\n92%\n核心购买品类\n婴儿洗护 32.1%\n纸尿裤 28.4%\n湿巾 18.7%\n建议动作\n加大夜间内容与直播排期\n创建任务\n联"
+  },
+  {
+    "name": "Source modal closes with Escape",
+    "status": "FAIL",
+    "evidence": "visible=True"
+  },
+  {
+    "name": "Saved snapshot survives reload",
+    "status": "FAIL",
+    "evidence": "GMV\n¥2,483,221\n较上期 +12.5% ▲\n转化率\n3.24%\n较上期 +0.6% ▲\n内容互动量\n1,204,331\n较上期 +18.7% ▲\n广告 ROI\n4.32\n较上期 +9.1% ▲\n复购率\n28.6%\n较上期 +2.3% ▲"
+  },
+  {
+    "name": "PDF export matches button",
+    "status": "FAIL",
+    "evidence": "business-world-report.txt"
+  },
+  {
+    "name": "Mobile has no workspace horizontal overflow",
+    "status": "PASS",
+    "evidence": {
+      "viewport": 390,
+      "document": 473,
+      "workspace": 318,
+      "client": 318
+    }
+  },
+  {
+    "name": "No developer-only copy",
+    "status": "PASS",
+    "evidence": "这是桌面工作台的响应式预览。产品主设计目标仍是数据密集型桌面工作区。"
+  }
+]
