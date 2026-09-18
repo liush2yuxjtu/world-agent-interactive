@@ -36,8 +36,10 @@ try:
         page=context.new_page()
         page.set_default_timeout(5000)
         errors=[]
+        bad_responses=[]
         page.on("pageerror",lambda e: errors.append("pageerror: "+str(e)))
-        page.on("console",lambda m: errors.append("console: "+m.text) if m.type=="error" else None)
+        page.on("console",lambda m: errors.append("console: "+m.text+" @ "+str(m.location)) if m.type=="error" else None)
+        page.on("response",lambda r: bad_responses.append(f"{r.status} {r.url}") if r.status>=400 else None)
 
         page.goto(URL,wait_until="domcontentloaded")
         expect(page.locator("#landing")).to_be_visible()
@@ -180,7 +182,7 @@ try:
 
         # Basic overflow check after dense routes
         assert page.evaluate("document.documentElement.scrollWidth")<=1440
-        assert errors==[],errors
+        assert errors==[] and bad_responses==[],errors+bad_responses
         print("PASS no uncaught browser errors across the full UI workflow",flush=True)
         browser.close()
 finally:
