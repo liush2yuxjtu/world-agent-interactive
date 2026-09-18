@@ -667,3 +667,99 @@ ui.html
 ui.md
 └─ Canonical interaction / state / ASCII handoff
 ```
+
+---
+
+# 19. Interaction Audit — No Dead Controls
+
+This UI handoff now includes a strict interaction rule:
+
+```text
+ANY CONTROL THAT LOOKS CLICKABLE
+        │
+        ├── has a real route / state change
+        ├── opens a detail / inspector / approval surface
+        ├── performs a prototype-safe action
+        └── or is visibly disabled
+
+NEVER:
+  styled like a button but does nothing
+  row hover with no click behavior
+  fake tab with no state change
+  external write without explicit human confirmation
+```
+
+## Fixed click contracts
+
+- Landing 登录 → enters app overview.
+- 预约演示 → opens demo-request interaction surface.
+- Sidebar items → route to each product page and update URL hash.
+- Cmd/Ctrl+K → focuses global search.
+- Persona cards → select + open Persona detail interaction.
+- Non-World-Builder segmented controls → toggle active state.
+- Overview channel cards → navigate to Content / Live / Product / Growth.
+- World Builder nodes → entity inspector.
+- Scenario selector → changes modeled state.
+- 发送到报告 → Reports.
+- 在 World Builder 中查看 → World Builder.
+- 内容机会 / 漏斗阶段 / metrics / recommendation rows / table rows → detail surface.
+- 创建任务 / 生成 brief / 新建实验 / 新建报告 → prototype action surface.
+- 直播“去执行” → HUMAN APPROVAL modal; never silent external write.
+- 导出 / 分享 / 邮件 / 保存备注 → explicit feedback/action.
+- 查看更多 / 查看全部 → detail surface instead of dead anchor.
+- Esc closes modal; Enter/Space activates keyboard-focused interactive surfaces.
+
+## Accessibility interaction contract
+
+```text
+pointer click
+keyboard Enter / Space
+Cmd/Ctrl+K search
+Esc close overlays
+focus-visible outline
+role=button + tabindex for non-native interactive cards/rows
+```
+
+## Route contract
+
+The prototype uses URL hash routing for stable deep links:
+
+```text
+#overview
+#persona
+#world
+#content
+#live
+#growth
+#product
+#experiment
+#report
+```
+
+A route change updates:
+
+```text
+active sidebar
+visible view
+fake product URL
+browser hash
+interactive wiring
+```
+
+## Human-approval boundary
+
+Any operation that would mutate an external business platform must flow through:
+
+```text
+recommendation
+   ↓
+review evidence
+   ↓
+show exact proposed change
+   ↓
+HUMAN APPROVAL
+   ↓
+execute / cancel
+```
+
+The HTML prototype stops at the confirmation surface.
