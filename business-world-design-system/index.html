@@ -13,7 +13,7 @@
     <div class="brand"><span class="brand-mark">BW</span><div><strong>Business World</strong><small>Design System</small></div></div>
     <nav>
       <a href="#principles">原则</a><a href="#tokens">Tokens</a><a href="#states">语义状态</a>
-      <a href="#components">Components</a><a href="#world">World Canvas</a><a href="#screens">Screens</a><a href="#flow">Flow</a><a href="#webflow">Webflow Mapping</a>
+      <a href="#components">Components</a><a href="#world">World Canvas</a><a href="#runtime">Runtime Truth</a><a href="#screens">Screens</a><a href="#flow">Flow</a><a href="#webflow">Design Mapping</a>
     </nav>
     <div class="nav-note">Canonical inputs<br><code>DESIGN.md</code><br><code>src/tokens.css</code><br><code>ui.md</code></div>
   </aside>
@@ -97,8 +97,21 @@
       </div>
     </section>
 
+    <section id="runtime" class="section">
+      <div class="section-head"><span>06</span><h2>Runtime Truth Surface</h2></div>
+      <div class="runtime-grid">
+        <article><small>WORLD SNAPSHOT</small><b>business_world_snapshot</b><p>跨域经营总览。当前为 <code>mock-sqlite</code> simulated source。</p></article>
+        <article><small>CONTENT</small><b>business_content_insights</b><p>短视频、互动、评论。未来对应抖音开放平台。</p></article>
+        <article><small>LIVE</small><b>business_live_insights</b><p>直播曝光、看播、互动与转化。</p></article>
+        <article><small>ADS</small><b>business_ad_insights</b><p>预算、消耗、CTR、CVR、CPA、ROI。</p></article>
+        <article><small>COMMERCE</small><b>business_commerce_insights</b><p>商品、库存、订单与售后。</p></article>
+        <article class="simulated"><small>EXPERIMENT</small><b>business_scenario_experiment</b><p>当前为 Mock DB + 固定弹性；必须标记 Simulation。</p></article>
+      </div>
+      <div class="truth-note"><b>Runtime contract:</b> 当前 Business World 数据源仍是 simulated / mock-sqlite。设计系统必须让这种 provenance 在 UI 上可见，而不是把模拟值包装成真实市场事实。</div>
+    </section>
+
     <section id="screens" class="section">
-      <div class="section-head"><span>06</span><h2>Screen Anatomy</h2></div>
+      <div class="section-head"><span>07</span><h2>Screen Anatomy</h2></div>
       <div class="anatomy">
         <div class="mini-nav">Nav rail<br><small>global layer switching</small></div>
         <div class="mini-work">
@@ -110,7 +123,7 @@
     </section>
 
     <section id="flow" class="section">
-      <div class="section-head"><span>07</span><h2>Canonical Agent Flow</h2></div>
+      <div class="section-head"><span>08</span><h2>Canonical Agent Flow</h2></div>
       <div class="flow">
         <div><i>1</i><b>你说目标</b><small>business question</small></div><em>→</em>
         <div><i>2</i><b>Eve 设计实验</b><small>plan_experiment</small></div><em>→</em>
@@ -122,7 +135,7 @@
     </section>
 
     <section id="webflow" class="section">
-      <div class="section-head"><span>08</span><h2>Webflow Mapping</h2></div>
+      <div class="section-head"><span>09</span><h2>Design Surface Mapping</h2></div>
       <div class="mapping">
         <div><b>Variables</b><span>primitive + semantic color / type / spacing / radius / elevation</span></div>
         <div><b>Classes & Tags</b><span>layout, state, density, interaction contracts</span></div>
@@ -130,6 +143,8 @@
         <div><b>Page Templates</b><span>Workspace · Evidence · Scenario · Report</span></div>
         <div><b>Screens</b><span>real product states; no text-only flowchart substitute</span></div>
         <div><b>Interactions</b><span>select · inspect · approve · simulate · verify · report</span></div>
+        <div><b>Penpot</b><span>Pages → Token Sets → Components + Variants → Templates → Screens → Flows → Runtime Truth</span></div>
+        <div><b>Git / Code</b><span><code>src/tokens.css</code> + coded primitives + this living reference site</span></div>
       </div>
       <div class="truth-note"><b>Product truth boundary:</b> Observed ≠ Inferred ≠ Simulated. No verified source → no fake KPI. External writes → explicit human approval.</div>
     </section>

@@ -24,6 +24,12 @@ Variables / Tokens
 
 The page intentionally reuses `../src/tokens.css` instead of creating an independent token source.
 
+## Penpot handoff
+
+`penpot-map.json` maps the same system into Penpot as Pages → Token Sets → Components / Variants → Templates → Screens → Flows → Runtime Truth.
+
+The current ChatGPT Penpot MCP session must have a Penpot project connected before these structures can be written into the canvas. The mapping is committed now so the visual implementation and code implementation share one contract.
+
 ## Webflow status
 
 This directory is also the code reference for the Webflow implementation. Current Webflow connector returned zero accessible sites, so Webflow Variables / Classes / Components cannot be written until a site exists in the connected workspace.

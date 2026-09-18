@@ -1,0 +1,40 @@
+{
+  "name": "Business World Agent Design System",
+  "canonicalSources": [
+    "../DESIGN.md",
+    "../src/tokens.css",
+    "../ui.md",
+    "../business-world-design-system/webflow-map.json",
+    "Business World Agent runtime docs: VALUE.md, docs/how-the-chatbot-works.md, docs/business-world-api-sources.md"
+  ],
+  "penpotStructure": {
+    "pages": ["00 Cover","01 Foundations","02 Components","03 World Model","04 Screens","05 Flows","06 Runtime Truth"],
+    "tokenSets": ["Color / Semantic","Typography","Spacing","Radius","Elevation","Motion"],
+    "components": ["Button","StateBadge","Metric","EvidenceRow","WorldNode","EntityInspector","DecisionCard"],
+    "variants": {
+      "Button": ["Primary","Secondary","Ghost","Destructive"],
+      "StateBadge": ["Observed","Inferred","Simulated","Verified","Needs review","Stale","Blocked","Draft"]
+    },
+    "templates": ["Analytical Workspace","Evidence Detail","Scenario / Experiment","Report"]
+  },
+  "runtimeTruth": {
+    "productLayers": ["World / Ontology","Runtime / Operations","Applications / Decisions"],
+    "businessTools": [
+      "business_world_snapshot",
+      "business_content_insights",
+      "business_live_insights",
+      "business_ad_insights",
+      "business_commerce_insights",
+      "business_scenario_experiment"
+    ],
+    "currentBusinessSourceMode": "simulated",
+    "currentProvider": "mock-sqlite",
+    "rules": [
+      "Observed, Inferred, Simulated and Unavailable must remain visually distinct.",
+      "Mock or simulated business data must never be presented as verified market truth.",
+      "Scenario output never overwrites the observed baseline.",
+      "External writes require explicit human approval.",
+      "No verified source means no fabricated KPI."
+    ]
+  }
+}
