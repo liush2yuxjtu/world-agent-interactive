@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Business World Agent — UI Handoff</title>
+<meta name="description" content="High-fidelity interactive UI handoff for Business World Agent">
+<style>
+:root{
+  --navy:#0d1f3a;--navy-2:#142a4c;--ink:#0b1733;--text:#455577;--muted:#7887a3;
+  --brand:#2468e8;--brand-2:#1558d6;--soft:#f5f8fc;--panel:#fff;--line:#e3e9f3;
+  --green:#15965f;--green-soft:#eaf8f1;--purple:#7457db;--purple-soft:#f1edff;
+  --blue-soft:#edf5ff;--warn:#a66c00;--warn-soft:#fff7e3;--shadow:0 14px 40px rgba(16,35,68,.08);
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth} body{margin:0;font:14px/1.45 Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:#f7f9fc;color:var(--ink)}
+button,input,textarea,select{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}
+.hidden{display:none!important}.muted{color:var(--muted)}.tiny{font-size:12px}.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.browser{min-height:100vh;background:#fff}.browserbar{height:38px;background:#f3f5f8;border-bottom:1px solid #d9dee8;display:flex;align-items:center;padding:0 14px;gap:12px;position:sticky;top:0;z-index:100}
+.dots{display:flex;gap:6px}.dot{width:10px;height:10px;border-radius:50%}.r{background:#ff5f56}.y{background:#ffbd2e}.g{background:#27c93f}
+.url{margin:auto;max-width:680px;flex:1;height:26px;border:1px solid #d9dee8;border-radius:8px;background:#fff;display:flex;align-items:center;padding:0 10px;color:#56637e;font-size:12px}
+.mode-switch{display:flex;gap:5px;background:#e9edf4;padding:3px;border-radius:8px}.mode-switch button{border:0;background:transparent;padding:5px 9px;border-radius:6px;color:#4f607d}.mode-switch button.active{background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.08);color:#0e2445}
+.marketing{background:#fff}.mnav{height:68px;display:flex;align-items:center;gap:34px;max-width:1320px;margin:auto;padding:0 26px;border-bottom:1px solid #eef2f7}
+.brandline{display:flex;align-items:center;gap:10px;font-weight:750}.brandicon{width:30px;height:30px;border-radius:8px;background:var(--brand);color:white;display:grid;place-items:center;font-size:16px}
+.mlinks{display:flex;gap:30px;margin-left:30px;color:#243556;font-size:13px}.mnav .spacer{flex:1}.btn{border:1px solid var(--line);background:#fff;border-radius:7px;padding:10px 15px;color:#203352;font-weight:650}.btn.primary{background:var(--brand);color:#fff;border-color:var(--brand)}.btn.primary:hover{background:var(--brand-2)}.btn.ghost{background:transparent}
+.hero{background:linear-gradient(180deg,#f7fbff 0,#fff 100%);padding:62px 0 44px}.hero-grid{max-width:1320px;margin:auto;padding:0 26px;display:grid;grid-template-columns:1fr 1.15fr;gap:54px;align-items:center}
+.eyebrow{display:inline-flex;background:#e7f1ff;color:var(--brand);padding:7px 11px;border-radius:999px;font-weight:700;font-size:12px}.hero h1{font-size:52px;line-height:1.08;letter-spacing:-1.8px;margin:18px 0 18px}.hero p{font-size:17px;color:#50617f;line-height:1.75;max-width:600px}.hero-actions{display:flex;gap:12px;margin:24px 0}.checks{display:flex;gap:18px;flex-wrap:wrap;color:#62718d;font-size:12px}.check:before{content:"✓";color:var(--brand);margin-right:6px}
+.preview{background:#fff;border:1px solid #dbe4ef;border-radius:12px;box-shadow:var(--shadow);overflow:hidden}.preview-head{height:34px;background:#f4f6f8;border-bottom:1px solid #e7ebf0;display:flex;align-items:center;padding:0 10px;gap:5px}.preview-body{display:grid;grid-template-columns:138px 1fr;height:360px}.preview-side{background:#102746;color:#d9e7ff;padding:18px 12px;font-size:11px}.preview-side b{display:block;color:#fff;margin-bottom:18px}.pnav{padding:8px;border-radius:5px;margin:4px 0}.pnav.active{background:#2468e8;color:#fff}.preview-main{padding:14px;background:#fafcff}.source{border:1px solid #bfe8d3;background:#edf9f3;color:#1a8054;padding:8px 10px;border-radius:6px;font-size:10px;font-weight:650;margin-bottom:9px}.mini-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.mini-kpi{background:#fff;border:1px solid #e6ebf2;border-radius:6px;padding:9px;font-size:9px}.mini-kpi b{display:block;font-size:15px;margin-top:3px}.mini-model{margin-top:9px;background:#fff;border:1px solid #e4e9f2;border-radius:7px;padding:10px;height:228px}.mini-title{font-weight:700}.mini-graph{position:relative;height:176px;margin-top:7px;background-image:radial-gradient(#dce4ee .8px,transparent .8px);background-size:12px 12px;border-radius:5px}.mnode{position:absolute;border:1px solid;padding:7px 9px;border-radius:5px;background:white;font-size:9px;min-width:88px}.mnode.obs{border-color:#7dd7aa;color:#176844}.mnode.inf{border-color:#a994ea;color:#5e43b7}.mnode.sim{border-color:#4f91f0;color:#175fbf;box-shadow:0 0 0 2px #dcebff}.features,.workflow,.teams{max-width:1320px;margin:auto;padding:28px 26px}.feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.fcard{border:1px solid var(--line);border-radius:10px;padding:22px;background:#fff}.ficon{width:38px;height:38px;border-radius:9px;background:#eaf3ff;color:var(--brand);display:grid;place-items:center;font-weight:800}.fcard h3{font-size:17px;margin:14px 0 8px}.fcard p{color:#61708b;line-height:1.7}.teams{display:flex;align-items:center;gap:26px;border-top:1px solid #edf1f6;border-bottom:1px solid #edf1f6}.teams strong{max-width:250px}.teamitem{display:flex;gap:8px;align-items:center;color:#40506c}.teamitem span{font-size:18px}.workflow h2{text-align:left;margin:0 0 22px}.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}.step{display:flex;gap:12px}.num{min-width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#e9f2ff;color:var(--brand);font-weight:800}.step b{display:block;margin-bottom:5px}.step p{margin:0;color:#697892;font-size:12px}.cta{background:#f3f7fc;padding:34px 26px;text-align:center}.cta h2{margin:0 0 7px}.cta-actions{display:flex;justify-content:center;gap:12px;margin-top:16px}.footer{max-width:1320px;margin:auto;padding:20px 26px;color:#7c899d;font-size:12px;display:flex;justify-content:space-between}
+
+.app{height:calc(100vh - 38px);display:grid;grid-template-columns:236px 1fr;background:#f6f8fb}.sidebar{background:linear-gradient(180deg,#10294b,#0d213d);color:#dce9fb;padding:20px 12px;display:flex;flex-direction:column}.sb-brand{font-size:18px;font-weight:780;padding:0 10px 18px}.sb-brand small{display:block;font-size:10px;font-weight:500;color:#a6bad6;letter-spacing:.7px;margin-top:2px}.navbtn{width:100%;border:0;background:transparent;color:#d8e6f7;text-align:left;padding:11px 12px;border-radius:6px;display:flex;align-items:center;gap:10px;margin:2px 0}.navbtn:hover{background:#16345e}.navbtn.active{background:#2468e8;color:#fff}.navico{width:20px;text-align:center}.sb-bottom{margin-top:auto;border-top:1px solid #29415f;padding:15px 10px 0;color:#b9cbe1;font-size:12px}.sb-bottom strong{display:block;color:#fff;margin-bottom:3px}
+.workspace{min-width:0;overflow:auto}.topbar{height:58px;background:white;border-bottom:1px solid #e5eaf2;display:flex;align-items:center;padding:0 18px;gap:10px;position:sticky;top:0;z-index:20}.searchbox{width:min(510px,48vw);position:relative}.searchbox input{width:100%;height:36px;border:1px solid #dfe5ef;border-radius:7px;padding:0 34px 0 34px;background:#fafbfc;color:#1b2e4f}.searchbox:before{content:"⌕";position:absolute;left:12px;top:7px;color:#687895;font-size:18px}.search-results{position:absolute;top:40px;left:0;right:0;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);border-radius:8px;padding:6px;z-index:50}.search-results button{display:block;width:100%;text-align:left;border:0;background:#fff;padding:9px;border-radius:5px}.search-results button:hover{background:#f0f5fb}.topbar .push{flex:1}.user{display:flex;align-items:center;gap:8px}.avatar{width:30px;height:30px;border-radius:50%;background:#e7eef9;display:grid;place-items:center;font-weight:800;color:#25446c}
+.canvas{padding:14px 18px 28px}.app-source{border:1px solid #bfe8d3;background:var(--green-soft);border-radius:7px;padding:10px 13px;display:flex;gap:14px;align-items:center;color:#27674d;margin-bottom:12px}.app-source strong{color:#188458}.source-meta{display:flex;gap:12px;font-size:12px;color:#60756d}.kpis{display:grid;grid-template-columns:repeat(5,minmax(130px,1fr));gap:12px;margin-bottom:12px}.kpi{background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px;min-height:94px}.kpi .label{color:#5f6d86;font-size:12px}.kpi .value{font-size:24px;font-weight:780;margin:6px 0 1px}.delta.up{color:var(--green)}.delta.down{color:#c14755}
+.main-grid{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:12px}.model-panel,.inspector,.evidence,.scenario-log,.generic-panel{background:#fff;border:1px solid var(--line);border-radius:8px}.model-panel{padding:12px}.model-head{display:flex;gap:12px;align-items:center}.model-title{font-size:18px;font-weight:780}.model-sub{color:#75829a;font-size:12px}.model-controls{margin-left:auto;display:flex;gap:7px;align-items:center}.seg{display:flex;border:1px solid #dce3ee;border-radius:7px;padding:2px;background:#fafbfc}.seg button{border:0;background:transparent;padding:7px 11px;border-radius:5px;color:#5a6880}.seg button.active{background:#eaf2ff;color:#2468e8;font-weight:700}.graph{height:370px;margin-top:12px;border:1px solid #e0e7f0;border-radius:7px;position:relative;background-color:#fbfcfe;background-image:radial-gradient(#dce5f1 .8px,transparent .8px);background-size:15px 15px;overflow:hidden}.node{position:absolute;min-width:145px;background:#fff;border:1px solid;padding:10px 12px;border-radius:7px;box-shadow:0 3px 10px rgba(32,55,90,.04);text-align:left}.node:hover{transform:translateY(-1px);box-shadow:0 7px 18px rgba(32,55,90,.08)}.node .ntype{font-size:10px;font-weight:700;margin-top:4px}.node.obs{border-color:#83d9af}.node.obs .ntype{color:#178457}.node.inf{border-color:#b0a1ea}.node.inf .ntype{color:#7158ce}.node.sim{border-color:#4f91f0;box-shadow:0 0 0 2px #dfebff}.node.sim .ntype{color:#1c69ce}.edge{position:absolute;height:1px;background:#8da0ba;transform-origin:left center;z-index:0}.graph .node{z-index:2}.legend{display:flex;gap:18px;padding:10px 2px 0;font-size:12px;color:#65728a}.legend i{width:9px;height:9px;border-radius:50%;display:inline-block;margin-right:5px}.inspector{padding:14px;min-height:470px}.inspector h3{margin:0 0 14px}.entity-title{font-size:17px;font-weight:760}.entity-value{font-size:22px;font-weight:780;margin:7px 0}.irow{display:flex;justify-content:space-between;padding:9px 0;border-top:1px solid #edf1f6;font-size:12px}.state-pill{padding:3px 7px;border-radius:999px;font-weight:700}.state-pill.obs{background:var(--green-soft);color:var(--green)}.state-pill.inf{background:var(--purple-soft);color:var(--purple)}.state-pill.sim{background:var(--blue-soft);color:var(--brand)}.idesc{border-top:1px solid #edf1f6;padding-top:10px;margin-top:6px;color:#5c6a82;font-size:12px;line-height:1.65}.iactions{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:14px}.iactions button{border:1px solid #dfe5ed;background:#fff;border-radius:6px;padding:8px;font-size:11px}.bottom-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:12px;margin-top:12px}.evidence,.scenario-log{padding:12px}.panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px}.table{width:100%;border-collapse:collapse;font-size:11px}.table th,.table td{text-align:left;padding:8px;border-top:1px solid #edf1f5;color:#596982}.table th{background:#f8fafc;color:#77849a;font-weight:650}.view{display:none}.view.active{display:block}.generic-panel{padding:20px;min-height:570px}.generic-panel h2{margin:0 0 8px}.empty{display:grid;place-items:center;text-align:center;min-height:420px;color:#60708d}.empty .big{font-size:44px}.empty h3{color:#172b4d;margin:12px 0 6px}.empty .btn{margin-top:10px}
+.editor-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:18px}.field label{display:block;color:#5b6980;font-size:12px;margin-bottom:5px}.field input,.field textarea,.field select{width:100%;border:1px solid #dce3ec;border-radius:7px;padding:9px;background:#fff}.field textarea{min-height:88px}.metric-form{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}.metric-form .field{background:#f9fbfd;padding:10px;border-radius:7px;border:1px solid #edf1f6}
+.report-card{border:1px solid #dfe7f1;border-radius:8px;padding:18px;margin-top:14px}.report-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}.report-stat{background:#f7f9fc;padding:12px;border-radius:7px}.report-stat b{font-size:20px;display:block}
+.scenario-form{display:grid;grid-template-columns:1.3fr .8fr .5fr auto;gap:10px;align-items:end;margin-top:14px}.scenario-result{margin-top:16px;padding:18px;border:1px solid #cfe2ff;background:#f5f9ff;border-radius:8px}.scenario-result h3{margin-top:0}.sim-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.sim-cell{background:white;border:1px solid #dce8f7;border-radius:7px;padding:12px}
+.toast{position:fixed;right:22px;bottom:22px;background:#11233f;color:#fff;border-radius:8px;padding:12px 16px;box-shadow:var(--shadow);z-index:200;opacity:0;transform:translateY(8px);pointer-events:none;transition:.2s}.toast.show{opacity:1;transform:none}
+.modal-wrap{position:fixed;inset:0;background:rgba(4,14,30,.4);display:grid;place-items:center;z-index:150;padding:20px}.modal{width:min(760px,95vw);max-height:90vh;overflow:auto;background:#fff;border-radius:11px;box-shadow:0 30px 100px rgba(0,0,0,.25);padding:20px}.modal-head{display:flex;justify-content:space-between;align-items:center}.modal-head h2{margin:0}.close{border:0;background:#eef2f6;width:30px;height:30px;border-radius:6px}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}
+.mobile-note{display:none}
+@media(max-width:1050px){.hero-grid{grid-template-columns:1fr}.preview{max-width:760px}.feature-grid{grid-template-columns:repeat(2,1fr)}.mnav .mlinks{display:none}.kpis{grid-template-columns:repeat(3,1fr)}.main-grid{grid-template-columns:1fr}.inspector{min-height:auto}.app{grid-template-columns:72px 1fr}.sb-brand{font-size:0}.sb-brand:before{content:"BW";font-size:15px}.navbtn span:last-child{display:none}.navbtn{justify-content:center}.sb-bottom{display:none}}
+@media(max-width:720px){.hero h1{font-size:38px}.feature-grid,.steps{grid-template-columns:1fr}.teams{overflow:auto}.mnav{gap:14px}.kpis{grid-template-columns:repeat(2,1fr)}.bottom-grid{grid-template-columns:1fr}.model-controls{flex-wrap:wrap}.graph{height:460px}.node{transform:scale(.88);transform-origin:top left}.scenario-form{grid-template-columns:1fr}.metric-form{grid-template-columns:repeat(2,1fr)}.editor-grid{grid-template-columns:1fr}.mobile-note{display:block;background:#fff7e3;border:1px solid #f2d38c;padding:8px;border-radius:6px;margin-bottom:10px}}
+</style>
+</head>
+<body>
+<div class="browser">
+  <div class="browserbar">
+    <div class="dots"><i class="dot r"></i><i class="dot y"></i><i class="dot g"></i></div>
+    <div class="url" id="fakeUrl">https://www.businessworldagent.com</div>
+    <div class="mode-switch"><button id="landingMode" class="active">Landing</button><button id="appMode">App</button></div>
+  </div>
+
+  <section id="landing" class="marketing">
+    <nav class="mnav">
+      <div class="brandline"><div class="brandicon">◇</div>Business World Agent</div>
+      <div class="mlinks"><a href="#features">产品功能</a><a href="#workflow">解决方案</a><a href="#teams">客户案例</a><a href="#cta">价格</a><a href="#footer">关于我们</a></div>
+      <div class="spacer"></div><button class="btn">登录</button><button class="btn">预约演示</button><button class="btn primary" data-open-app>立即体验</button>
+    </nav>
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">用真实数据，推演更好的生意</div>
+          <h1>把真实经营世界<br>装进一个可推演的系统</h1>
+          <p>Business World Agent 融合内容、直播、电商、广告、商品与市场环境，基于可验证的真实数据构建统一商业世界模型，通过情景模拟与 Agent 智能分析，帮助团队做出更确定的经营决策。</p>
+          <div class="hero-actions"><button class="btn primary" data-open-app>立即体验 →</button><button class="btn">预约演示</button></div>
+          <div class="checks"><span class="check">真实数据来源与证明</span><span class="check">场景化模拟推演</span><span class="check">专业 Agent 分析能力</span><span class="check">企业级安全保障</span></div>
+        </div>
+        <div class="preview" aria-label="Product preview">
+          <div class="preview-head"><i class="dot r"></i><i class="dot y"></i><i class="dot g"></i></div>
+          <div class="preview-body">
+            <div class="preview-side"><b>Business World Agent</b><div class="pnav">总览</div><div class="pnav">Persona Studio</div><div class="pnav active">World Builder</div><div class="pnav">内容策略</div><div class="pnav">直播作战室</div><div class="pnav">投放优化</div><div class="pnav">商品分析</div><div class="pnav">模拟实验</div><div class="pnav">报告</div></div>
+            <div class="preview-main">
+              <div class="source">✓ VERIFIED PERSISTED SOURCE · 电商运营数据库</div>
+              <div class="mini-kpis"><div class="mini-kpi">GMV<b>¥2,483,221</b></div><div class="mini-kpi">转化率<b>3.24%</b></div><div class="mini-kpi">内容互动量<b>1,204,331</b></div><div class="mini-kpi">广告 ROI<b>4.32</b></div></div>
+              <div class="mini-model"><div class="mini-title">商业世界模型</div><div class="mini-graph">
+                <div class="mnode obs" style="left:6%;top:20%">内容互动量<br><b>1,204,331</b></div>
+                <div class="mnode inf" style="left:8%;top:61%">人群分群<br><b>8 核心人群</b></div>
+                <div class="mnode inf" style="left:38%;top:30%">转化率<br><b>3.24%</b></div>
+                <div class="mnode obs" style="left:38%;top:68%">广告效率<br><b>ROI 4.32</b></div>
+                <div class="mnode sim" style="left:65%;top:45%">GMV<br><b>¥2,483,221</b></div>
+              </div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="features" class="features"><div class="feature-grid">
+      <article class="fcard"><div class="ficon">◇</div><h3>统一商业世界模型</h3><p>打通内容、直播、电商、广告、商品与市场环境，把经营实体、指标与因果关系放进同一个可检查的模型。</p><a style="color:var(--brand)">了解更多 →</a></article>
+      <article class="fcard"><div class="ficon">▤</div><h3>真实数据与来源证明</h3><p>接入多平台真实数据，保留完整来源、时间戳与数据状态，让每一个结论都有据可查。</p><a style="color:var(--brand)">了解更多 →</a></article>
+      <article class="fcard"><div class="ficon">▥</div><h3>情景模拟与推演</h3><p>对市场变化、投放策略、商品组合进行透明建模，在行动前比较不同情景下的业务结果。</p><a style="color:var(--brand)">了解更多 →</a></article>
+      <article class="fcard"><div class="ficon">✦</div><h3>Agent 协作分析</h3><p>基于统一经营事实层回答问题、解释变化、生成报告，并把观察事实与模型输出明确区分。</p><a style="color:var(--brand)">了解更多 →</a></article>
+    </div></section>
+    <section id="teams" class="teams"><strong>他们用 Business World Agent<br>做出更确定的经营决策</strong><div class="teamitem"><span>🛒</span>电商运营</div><div class="teamitem"><span>▤</span>内容团队</div><div class="teamitem"><span>▣</span>直播团队</div><div class="teamitem"><span>◁</span>投放团队</div><div class="teamitem"><span>◇</span>商品团队</div><div class="teamitem"><span>◎</span>管理层</div></section>
+    <section id="workflow" class="workflow"><h2>4 步开启你的商业推演之旅</h2><div class="steps">
+      <div class="step"><div class="num">1</div><div><b>连接数据源</b><p>接入电商、内容、直播、广告等多平台数据。</p></div></div>
+      <div class="step"><div class="num">2</div><div><b>构建商业世界模型</b><p>识别关键变量、业务实体与关系。</p></div></div>
+      <div class="step"><div class="num">3</div><div><b>运行情景模拟</b><p>设置策略变化，得到可复现的模型结果。</p></div></div>
+      <div class="step"><div class="num">4</div><div><b>生成分析报告</b><p>把证据、假设、结果整理成决策材料。</p></div></div>
+    </div></section>
+    <section id="cta" class="cta"><h2>让数据成为更好的经营伙伴</h2><div class="muted">进入 Business World Agent，查看统一经营世界并运行你的第一个情景。</div><div class="cta-actions"><button class="btn primary" data-open-app>立即体验</button><button class="btn">预约演示</button></div></section>
+    <footer id="footer" class="footer"><div>◇ <b>Business World Agent</b> · 用真实世界的数据，创造更确定的商业未来。</div><div>产品功能　解决方案　客户案例　价格　隐私政策　服务条款</div></footer>
+  </section>
+
+  <section id="app" class="app hidden">
+    <aside class="sidebar">
+      <div class="sb-brand">Business World Agent<small>REALITY FIRST</small></div>
+      <nav id="appNav">
+        <button class="navbtn" data-view="overview"><span class="navico">▦</span><span>总览</span></button>
+        <button class="navbtn" data-view="persona"><span class="navico">♙</span><span>Persona Studio</span></button>
+        <button class="navbtn active" data-view="world"><span class="navico">◇</span><span>World Builder</span></button>
+        <button class="navbtn" data-view="content"><span class="navico">▤</span><span>内容策略</span></button>
+        <button class="navbtn" data-view="live"><span class="navico">▣</span><span>直播作战室</span></button>
+        <button class="navbtn" data-view="growth"><span class="navico">◉</span><span>投放优化</span></button>
+        <button class="navbtn" data-view="product"><span class="navico">▢</span><span>商品分析</span></button>
+        <button class="navbtn" data-view="experiment"><span class="navico">♜</span><span>模拟实验</span></button>
+        <button class="navbtn" data-view="report"><span class="navico">▧</span><span>报告</span></button>
+      </nav>
+      <div class="sb-bottom"><strong>构建更真实的商业世界</strong>从数据出发 · 让决策更确定<br><br>⚙ 设置<br><br>？ 帮助中心</div>
+    </aside>
+    <main class="workspace">
+      <header class="topbar">
+        <div class="searchbox"><input id="searchInput" placeholder="搜索节点、指标或业务问题…"><div id="searchResults" class="search-results hidden"></div></div>
+        <div class="push"></div>
+        <button class="btn" id="refreshBtn">↻ 刷新数据</button>
+        <button class="btn" id="sourceBtn">▤ 数据来源</button>
+        <div class="user"><div class="avatar">ZL</div><span>张立⌄</span></div>
+      </header>
+      <div class="canvas">
+        <div class="mobile-note">这是桌面工作台的响应式预览。产品主设计目标仍是数据密集型桌面工作区。</div>
+        <div class="app-source"><strong>✓ VERIFIED PERSISTED SOURCE</strong><div class="source-meta"><span>数据源：电商运营数据库（Production）</span><span>提供方：BWA Data Hub</span><span id="sourceTime">最后更新：2026-09-18 08:48</span></div></div>
+        <div class="kpis" id="kpiRow"></div>
+
+        <section class="view" id="view-overview"></section>
+        <section class="view" id="view-persona"></section>
+        <section class="view active" id="view-world">
+          <div class="main-grid">
+            <div class="model-panel">
+              <div class="model-head"><div><div class="model-title">商业世界模型</div><div class="model-sub">探索业务实体之间的关系，区分已观测、推断与模拟输出。</div></div>
+                <div class="model-controls"><span class="tiny muted">场景选择：</span><div class="seg" id="scenarioSeg"><button data-scenario="baseline" class="active">基准情景</button><button data-scenario="growth">增长计划</button><button data-scenario="downside">下行风险</button></div><button class="btn primary" id="runSim">▶ 运行模拟</button></div>
+              </div>
+              <div class="graph" id="graph">
+                <div class="edge" style="left:24%;top:28%;width:22%;transform:rotate(18deg)"></div>
+                <div class="edge" style="left:23%;top:69%;width:26%;transform:rotate(-19deg)"></div>
+                <div class="edge" style="left:47%;top:36%;width:23%;transform:rotate(20deg)"></div>
+                <div class="edge" style="left:47%;top:66%;width:24%;transform:rotate(-15deg)"></div>
+                <div class="edge" style="left:70%;top:50%;width:20%;transform:rotate(-18deg)"></div>
+                <div class="edge" style="left:70%;top:52%;width:21%;transform:rotate(19deg)"></div>
+                <button class="node obs" data-entity="content" style="left:7%;top:15%">内容互动量<br><b>1,204,331</b><div class="ntype">Observed</div></button>
+                <button class="node inf" data-entity="persona" style="left:8%;top:62%">人群分群<br><b>8 个核心人群</b><div class="ntype">Inferred</div></button>
+                <button class="node obs" data-entity="live" style="left:35%;top:8%">直播间表现<br><b>342,120</b><div class="ntype">Observed</div></button>
+                <button class="node inf" data-entity="conversion" style="left:35%;top:38%">转化率<br><b>3.24%</b><div class="ntype">Inferred</div></button>
+                <button class="node obs" data-entity="ads" style="left:35%;top:70%">广告效率<br><b>ROI 4.32</b><div class="ntype">Observed</div></button>
+                <button class="node sim" data-entity="gmv" style="left:66%;top:42%">GMV<br><b id="graphGmv">¥2,483,221</b><div class="ntype">Simulated</div></button>
+                <button class="node inf" data-entity="revenue" style="left:83%;top:19%">收入<br><b>¥2,317,892</b><div class="ntype">Inferred</div></button>
+                <button class="node obs" data-entity="repeat" style="left:83%;top:67%">复购率<br><b>28.6%</b><div class="ntype">Observed</div></button>
+              </div>
+              <div class="legend"><span><i style="background:#24a56b"></i>已观测 (Observed)</span><span><i style="background:#8066de"></i>推断 (Inferred)</span><span><i style="background:#2468e8"></i>模拟输出 (Simulated)</span></div>
+            </div>
+            <aside class="inspector" id="inspector"></aside>
+          </div>
+          <div class="bottom-grid"><div class="evidence"><div class="panel-head"><strong>证据与数据 <span class="muted">5</span></strong><a style="color:var(--brand)">查看更多 →</a></div><table class="table"><thead><tr><th>时间</th><th>来源</th><th>事件</th><th>详情</th></tr></thead><tbody id="evidenceBody"></tbody></table></div><div class="scenario-log"><div class="panel-head"><strong>模拟记录 <span class="muted">3</span></strong><a style="color:var(--brand)">查看更多 →</a></div><table class="table"><thead><tr><th>时间</th><th>场景</th><th>核心假设</th><th>预期结果</th></tr></thead><tbody id="scenarioBody"></tbody></table></div></div>
+        </section>
+
+        <section class="view" id="view-experiment">
+          <div class="generic-panel"><h2>模拟实验</h2><div class="muted">使用明确假设和透明数学模型对已持久化基线进行情景推演。模型输出不会被标记为已观测事实。</div>
+            <div class="scenario-form">
+              <div class="field"><label>情景描述</label><input id="expPrompt" value="如果提升结账转化效率，会怎样影响 GMV？"></div>
+              <div class="field"><label>经营杠杆</label><select id="expLever"><option value="checkout_conversion">结账转化率</option><option value="ad_efficiency">广告效率</option><option value="content_engagement">内容互动</option><option value="repeat_purchase">复购率</option></select></div>
+              <div class="field"><label>变化 %</label><input id="expChange" type="number" value="10"></div><button class="btn primary" id="expRun">运行实验</button>
+            </div>
+            <div class="scenario-result" id="expResult"><h3>等待运行</h3><div class="muted">选择杠杆和变化幅度后运行。结果会保留 baseline、assumption 与 modeled output。</div></div>
+          </div>
+        </section>
+        <section class="view" id="view-report">
+          <div class="generic-panel"><h2>报告</h2><div class="muted">从统一事实层、证据记录与模拟结果生成可核查报告。</div>
+            <div class="report-card"><b>经营状态摘要 · 2026-09-18</b><div class="report-grid"><div class="report-stat">GMV<b>¥2,483,221</b><span class="delta up">+12.5%</span></div><div class="report-stat">广告 ROI<b>4.32</b><span class="delta up">+9.1%</span></div><div class="report-stat">复购率<b>28.6%</b><span class="delta up">+2.3%</span></div></div></div>
+            <div class="report-card"><b>结论与证据边界</b><p class="muted">观察事实、推断结论和模拟输出必须分别标注。报告中的每个关键值应可追溯到来源、更新时间与模型假设。</p><button class="btn primary" id="downloadReport">生成并下载报告</button></div>
+          </div>
+        </section>
+        <section class="view" id="view-content"></section>
+        <section class="view" id="view-live"></section>
+        <section class="view" id="view-growth"></section>
+        <section class="view" id="view-product"></section>
+      </div>
+    </main>
+  </section>
+</div>
+
+<div class="modal-wrap hidden" id="sourceModal">
+  <div class="modal"><div class="modal-head"><div><h2>数据来源</h2><div class="muted">编辑持久化经营快照的来源信息与关键指标。</div></div><button class="close" id="closeSource">×</button></div>
+    <div class="editor-grid"><div class="field"><label>来源名称</label><input id="sourceName" value="电商运营数据库（Production）"></div><div class="field"><label>Provider</label><select id="sourceProvider"><option>BWA Data Hub</option><option>Manual Entry</option><option>Official API</option></select></div></div>
+    <div class="metric-form">
+      <div class="field"><label>GMV</label><input id="editGmv" type="number" value="2483221"></div><div class="field"><label>转化率 %</label><input id="editConversion" type="number" step=".01" value="3.24"></div>
+      <div class="field"><label>广告 ROI</label><input id="editRoi" type="number" step=".01" value="4.32"></div><div class="field"><label>复购率 %</label><input id="editRepeat" type="number" step=".1" value="28.6"></div>
+    </div>
+    <div class="field" style="margin-top:12px"><label>来源备注</label><textarea id="sourceNotes">已验证业务快照。生产实现应保留 source type、observedAt、updatedAt 和 persistence provenance。</textarea></div>
+    <div class="modal-actions"><button class="btn" id="cancelSource">取消</button><button class="btn primary" id="saveSource">保存快照</button></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const state={
+  mode:'landing',view:'world',scenario:'baseline',
+  data:{gmv:2483221,conversion:3.24,engagement:1204331,roi:4.32,repeat:28.6,live:342120,revenue:2317892},
+  entity:'gmv'
+};
+const views={
+  overview:{title:'总览',desc:'统一查看当前真实经营快照。',metrics:[['GMV','¥2,483,221'],['转化率','3.24%'],['内容互动量','1,204,331'],['广告 ROI','4.32']]},
+  persona:{title:'Persona Studio',desc:'策略模板 ≠ 观测事实。仅在接入可验证分群数据后展示真实 Persona 指标。',empty:'当前消费者分群仍处于推断层。请连接真实分群或行为数据后再发布为经营事实。'},
+  content:{title:'内容策略',desc:'基于已持久化内容观测设计策略。',metrics:[['内容互动量','1,204,331'],['互动率','8.4%'],['内容机会','17 条']]},
+  live:{title:'直播作战室',desc:'直播指标来自同一 Business World 事实层。',metrics:[['直播表现','342,120'],['进房率','18.6%'],['加购率','5.8%']]},
+  growth:{title:'投放优化',desc:'仅显示核验后的聚合投放数据。',metrics:[['预算','¥420,000'],['ROI','4.32'],['CPA','¥82']]},
+  product:{title:'商品分析',desc:'交易指标与商品表现保持可追溯来源。',metrics:[['GMV','¥2,483,221'],['转化率','3.24%'],['新客','8,126']]}
+};
+const entities={
+  content:{title:'内容互动量',value:'1,204,331',type:'Observed',confidence:'Source verified',source:'内容平台',time:'2026-09-18 08:42',definition:'所选时间范围内内容产生的可验证互动总量。'},
+  persona:{title:'人群分群',value:'8 个核心人群',type:'Inferred',confidence:'87%',source:'分群模型 · 11 signals',time:'2026-09-18 08:37',definition:'基于已观测行为信号形成的人群分组，属于推断状态。'},
+  live:{title:'直播间表现',value:'342,120',type:'Observed',confidence:'Source verified',source:'直播平台',time:'2026-09-18 08:39',definition:'直播曝光、看播与互动层面的聚合观测。'},
+  conversion:{title:'转化率',value:'3.24%',type:'Inferred',confidence:'92%',source:'Commerce model',time:'2026-09-18 08:41',definition:'从当前事实层计算得到的业务转化比例。'},
+  ads:{title:'广告效率',value:'ROI 4.32',type:'Observed',confidence:'Source verified',source:'广告平台',time:'2026-09-18 08:40',definition:'投放成本与收入之间的已验证效率指标。'},
+  gmv:{title:'GMV',value:'¥2,483,221',type:'Simulated',confidence:'92%',source:'电商运营数据库（Production）',time:'2026-09-18 08:48',definition:'在所选时间范围内，通过所有渠道产生的已支付订单商品总金额。当前 World Builder 节点可在情景中呈现模拟输出。'},
+  revenue:{title:'收入',value:'¥2,317,892',type:'Inferred',confidence:'89%',source:'Revenue model',time:'2026-09-18 08:44',definition:'由已观测交易与财务映射规则形成的收入推断。'},
+  repeat:{title:'复购率',value:'28.6%',type:'Observed',confidence:'Source verified',source:'Commerce DB',time:'2026-09-18 08:46',definition:'已购买用户在观察窗口内发生再次购买的比例。'}
+};
+const evidence=[
+ ['08:48','电商数据库','更新 GMV 数据','¥2,483,221 (+12.5%)'],['08:42','内容平台','更新内容互动量','1,204,331 (+18.7%)'],['08:40','广告平台','更新广告投放数据','ROI 4.32 (+9.1%)'],['08:37','系统推断','更新人群分群结果','8 核心人群 (87%)'],['08:39','直播平台','更新直播间表现','342,120 (+15.3%)']
+];
+const scenarios=[['08:20','增长计划','提升广告效率 20%','GMV +18.4%'],['07:45','基准情景','保持当前策略','GMV +2.1%'],['昨日 16:05','下行风险','广告预算 -30%','GMV -12.6%']];
+function money(n){return '¥'+Math.round(n).toLocaleString('zh-CN')}
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)}
+function setMode(mode){state.mode=mode;$('#landing').classList.toggle('hidden',mode!=='landing');$('#app').classList.toggle('hidden',mode!=='app');$('#landingMode').classList.toggle('active',mode==='landing');$('#appMode').classList.toggle('active',mode==='app');$('#fakeUrl').textContent=mode==='landing'?'https://www.businessworldagent.com':'https://app.businessworldagent.com/'+state.view}
+$('#landingMode').onclick=()=>setMode('landing');$('#appMode').onclick=()=>setMode('app');$$('[data-open-app]').forEach(b=>b.onclick=()=>setMode('app'));
+function renderKpis(){const d=state.data;$('#kpiRow').innerHTML=[
+ ['GMV',money(d.gmv),'+12.5%'],['转化率',d.conversion.toFixed(2)+'%','+0.6%'],['内容互动量',d.engagement.toLocaleString(),'+18.7%'],['广告 ROI',d.roi.toFixed(2),'+9.1%'],['复购率',d.repeat.toFixed(1)+'%','+2.3%']
+].map(x=>'<div class="kpi"><div class="label">'+x[0]+'</div><div class="value">'+x[1]+'</div><div class="delta up">较上期 '+x[2]+' ▲</div></div>').join('')}
+function typeClass(type){return type==='Observed'?'obs':type==='Inferred'?'inf':'sim'}
+function renderInspector(key){state.entity=key;const e=entities[key];$('#inspector').innerHTML='<h3>实体详情</h3><div class="entity-title">'+e.title+'</div><div class="muted tiny">业务实体 / 指标</div><div class="entity-value">'+e.value+'</div><div class="irow"><span>状态</span><span class="state-pill '+typeClass(e.type)+'">'+e.type+'</span></div><div class="irow"><span>置信度</span><b>'+e.confidence+'</b></div><div class="irow"><span>数据来源</span><b>'+e.source+'</b></div><div class="irow"><span>更新时间</span><b>'+e.time+'</b></div><div class="idesc"><b style="color:#1b2f50">定义</b><br>'+e.definition+'</div><div class="iactions"><button data-action="factor">查看相关因子</button><button data-action="simulate">在新场景中模拟</button><button data-action="watch">添加监控</button><button data-action="history">查看历史趋势</button></div>';
+ $$('#inspector [data-action]').forEach(b=>b.onclick=()=>{if(b.dataset.action==='simulate')setView('experiment');else toast('已执行：'+b.textContent)})}
+$$('.node').forEach(n=>n.onclick=()=>renderInspector(n.dataset.entity));
+function renderEvidence(){const rows=a=>a.map(r=>'<tr>'+r.map(c=>'<td>'+c+'</td>').join('')+'</tr>').join('');$('#evidenceBody').innerHTML=rows(evidence);$('#scenarioBody').innerHTML=rows(scenarios)}
+function renderGeneric(id){const v=views[id];const el=$('#view-'+id);if(!v||!el)return;const metrics=(v.metrics||[]).map(m=>'<div class="report-stat">'+m[0]+'<b>'+m[1]+'</b></div>').join('');el.innerHTML='<div class="generic-panel"><h2>'+v.title+'</h2><div class="muted">'+v.desc+'</div>'+(metrics?'<div class="report-grid">'+metrics+'</div>':'')+(v.empty?'<div class="empty"><div><div class="big">◇</div><h3>当前没有可验证的数据</h3><div>'+v.empty+'</div><button class="btn primary open-source">连接 / 录入真实数据</button></div></div>':'')+'</div>';el.querySelectorAll('.open-source').forEach(b=>b.onclick=openSource)}
+Object.keys(views).forEach(renderGeneric);
+function setView(id){state.view=id;$$('.view').forEach(v=>v.classList.remove('active'));$('#view-'+id)?.classList.add('active');$$('.navbtn').forEach(b=>b.classList.toggle('active',b.dataset.view===id));$('#fakeUrl').textContent='https://app.businessworldagent.com/'+id;if(id==='world')renderInspector(state.entity);$('#searchResults').classList.add('hidden')}
+$$('.navbtn').forEach(b=>b.onclick=()=>setView(b.dataset.view));
+const navIndex=[['overview','总览'],['persona','Persona Studio'],['world','World Builder'],['content','内容策略'],['live','直播作战室'],['growth','投放优化'],['product','商品分析'],['experiment','模拟实验'],['report','报告']];
+$('#searchInput').addEventListener('input',e=>{const q=e.target.value.trim().toLowerCase();const r=$('#searchResults');if(!q){r.classList.add('hidden');return}const matches=navIndex.filter(x=>x[1].toLowerCase().includes(q)||x[0].includes(q));r.innerHTML=matches.length?matches.map(x=>'<button data-go="'+x[0]+'">'+x[1]+'</button>').join(''):'<div class="muted tiny" style="padding:10px">没有匹配页面</div>';r.classList.remove('hidden');r.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{setView(b.dataset.go);$('#searchInput').value=''})});
+$('#refreshBtn').onclick=()=>{const now=new Date();$('#sourceTime').textContent='最后更新：'+now.toLocaleString('zh-CN',{hour12:false});toast('已刷新 Business World 状态')};
+$$('#scenarioSeg button').forEach(b=>b.onclick=()=>{$$('#scenarioSeg button').forEach(x=>x.classList.remove('active'));b.classList.add('active');state.scenario=b.dataset.scenario;const factor=state.scenario==='growth' ? 1.184 : state.scenario==='downside' ? 0.874 : 1;const modeled=Math.round(state.data.gmv*factor);$('#graphGmv').textContent=money(modeled);entities.gmv.value=money(modeled);renderInspector('gmv')});
+$('#runSim').onclick=()=>{const b=$('#runSim');const old=b.textContent;b.disabled=true;b.textContent='计算中…';setTimeout(()=>{b.disabled=false;b.textContent=old;toast('情景已重新计算并写入模拟记录')},650)};
+function openSource(){$('#sourceModal').classList.remove('hidden')}function closeSource(){$('#sourceModal').classList.add('hidden')}
+$('#sourceBtn').onclick=openSource;$('#closeSource').onclick=closeSource;$('#cancelSource').onclick=closeSource;$('#sourceModal').addEventListener('click',e=>{if(e.target.id==='sourceModal')closeSource()});
+$('#saveSource').onclick=()=>{state.data.gmv=Number($('#editGmv').value)||0;state.data.conversion=Number($('#editConversion').value)||0;state.data.roi=Number($('#editRoi').value)||0;state.data.repeat=Number($('#editRepeat').value)||0;entities.gmv.value=money(state.data.gmv);entities.conversion.value=state.data.conversion.toFixed(2)+'%';entities.ads.value='ROI '+state.data.roi.toFixed(2);entities.repeat.value=state.data.repeat.toFixed(1)+'%';$('#graphGmv').textContent=money(state.data.gmv);renderKpis();renderInspector(state.entity);closeSource();toast('真实数据快照已更新（原型内存状态）')};
+$('#expRun').onclick=()=>{const lever=$('#expLever').selectedOptions[0].textContent,p=Number($('#expChange').value)||0,m=1+p/100;const gmv=Math.round(state.data.gmv*m),roi=(state.data.roi*m).toFixed(2),conv=(state.data.conversion*m).toFixed(2);$('#expResult').innerHTML='<h3>模拟完成 · '+lever+' '+(p>=0?'+':'')+p+'%</h3><div class="sim-grid"><div class="sim-cell">Baseline GMV<b style="display:block;font-size:20px">'+money(state.data.gmv)+'</b></div><div class="sim-cell">Modeled GMV<b style="display:block;font-size:20px">'+money(gmv)+'</b></div><div class="sim-cell">Modeled ROI<b style="display:block;font-size:20px">'+roi+'</b></div><div class="sim-cell">Modeled CVR<b style="display:block;font-size:20px">'+conv+'%</b></div></div><p class="muted tiny">Scenario output 是对持久化基线的透明数学模型，不是已观测市场结果，也不是 AI 预测。</p>';toast('Scenario run 已生成')};
+$('#downloadReport').onclick=()=>{const text='Business World Agent 报告\nGMV: '+money(state.data.gmv)+'\nROI: '+state.data.roi+'\n复购率: '+state.data.repeat+'%\n\nObserved / Inferred / Simulated 已分层。';const blob=new Blob([text],{type:'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='business-world-report.txt';a.click();URL.revokeObjectURL(a.href);toast('报告已生成')};
+renderKpis();renderInspector('gmv');renderEvidence();setView('world');
+</script>
+</body>
+</html>
