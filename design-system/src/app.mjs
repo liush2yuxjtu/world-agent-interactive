@@ -1,3 +1,4 @@
+import '../../src/posthog.mjs';
 import {createTokenStore} from './store.mjs';
 import {CATEGORIES,exportCSS} from './tokens.mjs';
 import {shell,overview,catalog,components,accessibility,sourceView,inspector,pageInfo,e} from './views.mjs';
