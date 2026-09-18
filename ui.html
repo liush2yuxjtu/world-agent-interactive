@@ -371,7 +371,7 @@ document.addEventListener('click',e=>{
 
   const pc=e.target.closest('.persona-card');
   if(pc){
-    $('.persona-card').forEach(x=>x.classList.remove('selected'));
+    $$('.persona-card').forEach(x=>x.classList.remove('selected'));
     pc.classList.add('selected');
     openDetail(pc.querySelector('.persona-title')?.textContent||'Persona','<div class="detail-meta"><div><small>状态</small>Observed / Inferred</div><div><small>证据</small>订单、内容、CRM、直播</div></div><p>已切换当前 Persona。行为信号、生命周期和证据区域应同步刷新。</p>',{eyebrow:'PERSONA',confirm:false});
     return;
