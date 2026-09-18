@@ -1,0 +1,147 @@
+{
+  "sourceOfTruth": [
+    "DESIGN.md",
+    "src/tokens.css",
+    "ui.md"
+  ],
+  "variables": {
+    "collections": [
+      "Color / Semantic",
+      "Typography",
+      "Spacing",
+      "Radius",
+      "Elevation",
+      "Motion"
+    ],
+    "semantic": [
+      "brand",
+      "brand-hover",
+      "brand-soft",
+      "ink",
+      "text",
+      "muted",
+      "surface",
+      "surface-soft",
+      "border",
+      "success",
+      "warning",
+      "error",
+      "inference"
+    ]
+  },
+  "classes": [
+    "ds-shell",
+    "workspace",
+    "panel",
+    "state-observed",
+    "state-inferred",
+    "state-simulated",
+    "btn-primary",
+    "btn-secondary",
+    "badge",
+    "world-node",
+    "inspector",
+    "evidence-row",
+    "decision-card"
+  ],
+  "components": [
+    {
+      "name": "Button",
+      "variants": [
+        "Primary",
+        "Secondary",
+        "Ghost",
+        "Destructive"
+      ]
+    },
+    {
+      "name": "StateBadge",
+      "variants": [
+        "Observed",
+        "Inferred",
+        "Simulated",
+        "Verified",
+        "Needs review",
+        "Stale",
+        "Blocked",
+        "Draft"
+      ]
+    },
+    {
+      "name": "Metric",
+      "props": [
+        "value",
+        "unit",
+        "period",
+        "baseline",
+        "source",
+        "freshness",
+        "scenario"
+      ]
+    },
+    {
+      "name": "EvidenceRow",
+      "props": [
+        "source",
+        "type",
+        "observedAt",
+        "freshness",
+        "verification",
+        "confidence"
+      ]
+    },
+    {
+      "name": "WorldNode",
+      "props": [
+        "entityType",
+        "label",
+        "value",
+        "state",
+        "selected"
+      ]
+    },
+    {
+      "name": "EntityInspector",
+      "slots": [
+        "metrics",
+        "relationships",
+        "evidence",
+        "history",
+        "actions"
+      ]
+    },
+    {
+      "name": "DecisionCard",
+      "props": [
+        "action",
+        "expectedOutcome",
+        "rationale",
+        "scope",
+        "uncertainty",
+        "reversible",
+        "approvalRequired"
+      ]
+    }
+  ],
+  "pageTemplates": [
+    "Analytical Workspace",
+    "Evidence Detail",
+    "Scenario / Experiment",
+    "Report"
+  ],
+  "flow": [
+    "Business question",
+    "plan_experiment",
+    "human approval",
+    "run_experiment",
+    "get_run",
+    "check_reliability",
+    "explain result + limits"
+  ],
+  "trustRules": [
+    "Observed, Inferred, Simulated, Template, and Unavailable are visually distinct.",
+    "No verified source means no fake KPI.",
+    "Scenario output never overwrites observed baseline.",
+    "External writes require explicit human approval."
+  ]
+}
