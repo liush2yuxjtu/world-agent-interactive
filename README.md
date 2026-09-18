@@ -2,7 +2,7 @@
 
 A multi-file World Agent frontend with a Chinese product landing page, a click-through market-simulation workspace, and a live explorer for the shared `src/tokens.css`.
 
-**Open the product:** [World Agent](https://liush2yuxjtu.github.io/world-agent-interactive/) · [Experiment workspace](https://liush2yuxjtu.github.io/world-agent-interactive/app/) · [Business World Model Preview](https://liush2yuxjtu.github.io/world-agent-interactive/business-world-model/) · [Design System Explorer](https://liush2yuxjtu.github.io/world-agent-interactive/design-system/)
+**Open the product:** [World Agent](https://liush2yuxjtu.github.io/world-agent-interactive/) · [Experiment workspace](https://liush2yuxjtu.github.io/world-agent-interactive/app/) · [Business World Model Preview](https://liush2yuxjtu.github.io/world-agent-interactive/business-world-model/) · [Design System Explorer](https://liush2yuxjtu.github.io/world-agent-interactive/design-system/) · [Business World Design System](https://liush2yuxjtu.github.io/world-agent-interactive/business-world-design-system/)
 
 This is a real frontend project rather than a self-contained HTML mockup. It has a development server with live reload, separate ES modules and stylesheets, shared design tokens, a production build, browser-tested interactions, and CI. Product numbers and simulation output are clearly labeled demo data.
 
