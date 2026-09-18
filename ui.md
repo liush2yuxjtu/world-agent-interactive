@@ -5,6 +5,42 @@
 > HTML implementation: `ui.html`  
 > Principle: **every major page must feel like a real product surface, not a placeholder card.**
 
+## Execution status — 2026-09-18
+
+**This handoff is not yet ALL PASS.** The browser implementation below now passes executable UI regressions, but the original product-truth requirement in §17.1 remains **FAIL**: `ui.html` uses a typed browser-local store, while the business Agent has not been connected to and verified against that same store. Do not label this a production-connected product or merge-ready all-pass audit.
+
+The diagrams that follow are the intended full product, not evidence that providers, inferred audiences, automated analytics or server persistence are connected. All historical illustrative numbers are examples. The original intended scope is retained; this status block does not waive any unmet requirement.
+
+| Capability | Implemented behavior | Acceptance |
+| --- | --- | --- |
+| All nine routes | Real selectable views, entity/detail actions, contextual domain handoffs, keyboard controls and mobile layouts | Executable UI checks pass |
+| Record entry | Seven bounded numeric fields, name/notes/time; browser-local persistence; manually entered, unverified; safe empty/error states | Browser-local workflow passes; server connection is not claimed |
+| Example catalogues | Rich examples remain distinct, opt-in and labelled; no examples become observed business facts | UI truth checks pass |
+| Persona | Selection/filter/keyboard/detail/evidence/task flow; templates carry no measured audience claim | UI checks pass; real audience ingestion remains outside implemented data connection |
+| Content / Live / Growth / Product | Selected details, domain navigation, editable confirmed drafts, brief-to-plan, category/campaign filters and experiment handoff | Tested interaction paths pass; examples are not live platform state |
+| Experiment | Validated inputs, pending/duplicate prevention, named lever and explicit uncalibrated sensitivity, frozen baseline, persisted history | UI checks pass; not a trained sales forecast |
+| PDF / PPT | Selected immutable report; browser print-to-PDF and actual OOXML PowerPoint from the same source | Export checks pass |
+| Share | Explicit consent creates a portable, read-only report-copy URL; tested in a fresh browser context | UI copy-sharing passes; not a revocable, authenticated or live-updating server link |
+| Email | Requires explicit recipients; saves an unsent draft for manual delivery | No automatic sending is claimed or performed |
+| Human notes / plans | Separately persisted; user confirms before saving; no external platform write | UI checks pass |
+| UI + business Agent boundary | **Not integrated or runtime-verified** | **FAIL — §17.1 remains a required product gate** |
+
+`npm run test:ui` checks implemented browser behavior. `npm run audit:ui` additionally enforces the original audit outcome and currently exits non-zero for the unmet shared-Agent boundary. Evidence and exact limitations: `docs/ui-audit/REPORT.md`, `docs/ui-audit/audit.json`, and `docs/ui-audit/runtime/results.json`.
+
+### Current module map
+
+- `ui.html`: product shell, source forms and accessible dialogs.
+- `src/ui-state.mjs`: typed local records, frozen scenarios/reports, explicit public-render allowlist and portable-copy validation.
+- `src/ui-runtime.mjs`: real user interactions; sources are never called verified by a manual edit.
+- `src/ui-surfaces.mjs`: clearly separated illustrative domain catalogues.
+- `src/ui-report.mjs`: PDF-print document and PPT generated from the selected immutable report.
+- `src/vendor/`: pinned MIT-licensed PowerPoint export library, loaded locally.
+- `tests/ui-state.test.mjs` / `tests/ui_browser.py`: executable regression suite on real HTTP-served build output.
+
+### User-facing copy boundary
+
+Developer notes, rubric identifiers, implementation plans and raw tool/error envelopes belong in this handoff or audit artifacts, never in the user interface. Known platform limitations are stated as product outcomes (“仅保存到当前浏览器”, “尚未发送”), not as implementation/debug prose. The UI explicitly distinguishes missing records, unverified manual entries, labelled examples and scenario estimates. Shared URLs disclose that they contain report data and cannot be revoked before the user confirms creation.
+
 ---
 
 ## 0. Global product shell
@@ -13,7 +49,7 @@
 ┌──────────────────────┬───────────────────────────────────────────────────────────────────────────────┐
 │ Business World Agent │ ⌕ Search                                             ↻ Refresh  ▤ Sources  ZL │
 │ REALITY FIRST        ├───────────────────────────────────────────────────────────────────────────────┤
-│                      │ ✓ VERIFIED PERSISTED SOURCE · source · provider · last updated               │
+│                      │ SOURCE STATUS · source · provider · source time (only verified by evidence)               │
 │ ▦ 总览               ├───────────────────────────────────────────────────────────────────────────────┤
 │ ♙ Persona Studio     │                                                                               │
 │ ◇ World Builder      │                                 ACTIVE VIEW                                   │
@@ -39,7 +75,7 @@
 - Data Source opens the persistent state editor.
 - Observed / Inferred / Simulated remain visually distinct everywhere.
 - Page switches preserve the shared business state.
-- Buttons that appear actionable must work in the prototype or show a clear prototype toast.
+- Buttons that appear actionable must perform a real action or state a clear product limitation. Developer-only “prototype implementation” commentary must not be shown to end users.
 
 ---
 
@@ -392,8 +428,8 @@ Error rules:
 - New Report → report composer.
 - PDF export uses current selected report.
 - PPT export uses same report source.
-- Share Link creates view-only link.
-- Send Email requires explicit recipients.
+- Share Link creates a view-only report-copy link after explicit consent. The implemented portable copy is not a revocable, access-controlled server share; that distinction must remain visible.
+- Send Email requires explicit recipients. The implemented action is labelled “准备邮件” and saves an unsent draft; a delivery integration must not be claimed until independently verified.
 - Save Note persists human-authored note separately from generated summary.
 - Report sections link back to source evidence and product pages.
 
@@ -428,6 +464,11 @@ Save:
 # 11. Global state hierarchy
 
 ```text
+Manual (unverified)
+  = entered by the user
+  = source name / notes / save time preserved
+  = never automatically classified as Observed
+
 Observed
   = directly supported by source evidence
 
@@ -654,15 +695,15 @@ AppShell
 ui.html
 ├─ Landing
 └─ App
-   ├─ Overview        ← deep implementation
-   ├─ Persona Studio  ← deep implementation
-   ├─ World Builder   ← deep implementation
-   ├─ Content         ← deep implementation
-   ├─ Live            ← deep implementation
-   ├─ Growth          ← deep implementation
-   ├─ Product         ← deep implementation
-   ├─ Experiment      ← deep implementation
-   └─ Report          ← deep implementation
+   ├─ Overview        ← interaction implementation; live data scope qualified above
+   ├─ Persona Studio  ← interaction implementation; live data scope qualified above
+   ├─ World Builder   ← interaction implementation; live data scope qualified above
+   ├─ Content         ← interaction implementation; live data scope qualified above
+   ├─ Live            ← interaction implementation; live data scope qualified above
+   ├─ Growth          ← interaction implementation; live data scope qualified above
+   ├─ Product         ← interaction implementation; live data scope qualified above
+   ├─ Experiment      ← interaction implementation; live data scope qualified above
+   └─ Report          ← interaction implementation; live data scope qualified above
 
 ui.md
 └─ Canonical interaction / state / ASCII handoff
@@ -691,21 +732,21 @@ NEVER:
 
 ## Fixed click contracts
 
-- Landing 登录 → enters app overview.
-- 预约演示 → opens demo-request interaction surface.
+- Landing 进入工作区 → enters app overview; it does not claim an authenticated login.
+- 了解使用方式 → opens product-use guidance; no fabricated demo booking is claimed.
 - Sidebar items → route to each product page and update URL hash.
 - Cmd/Ctrl+K → focuses global search.
 - Persona cards → select + open Persona detail interaction.
 - Non-World-Builder segmented controls → toggle active state.
 - Overview channel cards → navigate to Content / Live / Product / Growth.
 - World Builder nodes → entity inspector.
-- Scenario selector → changes modeled state.
+- Scenario selector → selects inputs; 运行模拟 computes and persists an explicitly modelled result.
 - 发送到报告 → Reports.
 - 在 World Builder 中查看 → World Builder.
 - 内容机会 / 漏斗阶段 / metrics / recommendation rows / table rows → detail surface.
-- 创建任务 / 生成 brief / 新建实验 / 新建报告 → prototype action surface.
-- 直播“去执行” → HUMAN APPROVAL modal; never silent external write.
-- 导出 / 分享 / 邮件 / 保存备注 → explicit feedback/action.
+- 创建任务 / 生成 brief / 新建实验 / 新建报告 → editable draft / scenario / report composers.
+- 直播“去执行” → editable action proposal and explicit confirmation; never a silent external write.
+- 导出 / 分享 / 邮件 / 保存备注 → the implemented and explicitly limited flows listed in the execution-status table above.
 - 查看更多 / 查看全部 → detail surface instead of dead anchor.
 - Esc closes modal; Enter/Space activates keyboard-focused interactive surfaces.
 
@@ -722,7 +763,7 @@ role=button + tabindex for non-native interactive cards/rows
 
 ## Route contract
 
-The prototype uses URL hash routing for stable deep links:
+Canonical routes use `#app/<page>`. The previous `#<page>` links below remain accepted for compatibility:
 
 ```text
 #overview
@@ -741,7 +782,7 @@ A route change updates:
 ```text
 active sidebar
 visible view
-fake product URL
+product navigation label
 browser hash
 interactive wiring
 ```
@@ -762,4 +803,4 @@ HUMAN APPROVAL
 execute / cancel
 ```
 
-The HTML prototype stops at the confirmation surface.
+The current UI stops at a confirmed, persisted proposal or unsent draft. It does not claim an external platform action occurred. The original production approval/execution requirement is retained.

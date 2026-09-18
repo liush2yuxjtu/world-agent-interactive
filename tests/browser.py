@@ -91,6 +91,7 @@ try:
         expect(page.locator('#draft-value')).to_have_value('#315dff')
         passed('Reset confirmation supports cancel and restores source values')
         page.get_by_role('button',name='Copy CSS variable reference',exact=True).click()
+        page.wait_for_function("document.querySelector('dialog') || document.querySelector('#toast-root')?.textContent.includes('Copied')")
         if page.locator('dialog').count():
             expect(page.locator('.ds-copy-fallback')).to_have_value('var(--color-brand)');page.keyboard.press('Escape')
         else:expect(page.locator('#toast-root')).to_contain_text('Copied')

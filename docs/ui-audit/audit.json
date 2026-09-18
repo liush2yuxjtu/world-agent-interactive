@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "scope": "Original ui.md full UI / interaction handoff; no requirement silently waived",
+  "allPass": false,
+  "intent": [
+    {"id":"navigation-and-details","status":"PASS","reason":"Nine views, selected details, source/entity search and contextual cross-page handoffs exercised in Chromium."},
+    {"id":"records-and-truth","status":"PASS","reason":"No seeded facts; bounded manual entry remains unverified; name, notes and time persist; refresh cannot invent freshness."},
+    {"id":"scenario-report-flow","status":"PASS","reason":"Validated lever-specific calculation, pending state, immutable baseline/history, report composition, notes, PDF/PPT and fresh-context read-only copy exercised."},
+    {"id":"human-action-boundary","status":"PASS","reason":"Editable brief-to-plan and explicitly addressed unsent email drafts; no external write requests."},
+    {"id":"accessibility-responsive","status":"PASS","reason":"Keyboard, dialogs/Escape/focus, own-scroll charts/tables/graph; nine expanded views at 1440, 768, 390 and 320 CSS px."},
+    {"id":"17.1-ui-agent-shared-business-state","status":"FAIL","reason":"UI still uses browser-local state. The actual business Agent does not use this boundary and shared server persistence/provenance has not been integrated and runtime-verified."}
+  ],
+  "developer": {
+    "status":"PASS",
+    "rating":"CLEAN",
+    "score":20,
+    "maximum":20,
+    "ruleSource":"ChatGPT Work Hub / Shared Context / recVAMDkF3q0WZYnT",
+    "scores":{"vocabulary":2,"internalIds":2,"rubricCriteria":2,"instructions":2,"reasoning":2,"protocol":2,"debugErrors":2,"roadmapFakeState":2,"renderBoundary":2,"browserEvidence":2},
+    "qualification":"Semantic and browser review of this UI only. Not a certification of the backend, other application entry points, authorization, forecasting quality or production deployment. Visual screenshot review status is recorded separately."
+  }
+}
