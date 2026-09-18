@@ -171,7 +171,8 @@ try:
         # Keyboard shortcut / Escape
         page.keyboard.press("Control+K")
         expect(search).to_be_focused()
-        page.locator(".metric").first.click()
+        page.locator('.navbtn[data-view="overview"]').click()
+        page.locator("#view-overview .metric").first.click()
         expect(page.locator("#detailModal")).to_be_visible()
         page.keyboard.press("Escape")
         assert "hidden" in (page.locator("#detailModal").get_attribute("class") or "")
