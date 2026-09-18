@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Business World Agent · Design System</title>
+<link rel="stylesheet" href="../src/tokens.css">
+<link rel="stylesheet" href="./design-system.css">
+</head>
+<body>
+<div class="ds-shell">
+  <aside class="ds-nav">
+    <div class="brand"><span class="brand-mark">BW</span><div><strong>Business World</strong><small>Design System</small></div></div>
+    <nav>
+      <a href="#principles">原则</a><a href="#tokens">Tokens</a><a href="#states">语义状态</a>
+      <a href="#components">Components</a><a href="#world">World Canvas</a><a href="#screens">Screens</a><a href="#flow">Flow</a><a href="#webflow">Webflow Mapping</a>
+    </nav>
+    <div class="nav-note">Canonical inputs<br><code>DESIGN.md</code><br><code>src/tokens.css</code><br><code>ui.md</code></div>
+  </aside>
+  <main class="ds-main">
+    <header class="hero">
+      <div><span class="eyebrow">BUSINESS WORLD AGENT · SYSTEM 01</span><h1>分析工作台，平静智能，可见因果。</h1><p>把世界状态、运行过程和业务决策分层表达。颜色表达意义，证据永远可检查，AI 行动永远保留人类控制。</p></div>
+      <div class="hero-stack">
+        <span class="layer l1">World / Ontology</span>
+        <span class="layer l2">Runtime / Operations</span>
+        <span class="layer l3">Applications / Decisions</span>
+      </div>
+    </header>
+
+    <section id="principles" class="section">
+      <div class="section-head"><span>01</span><h2>Design Principles</h2></div>
+      <div class="principle-grid">
+        <article><b>Model before decoration</b><p>世界模型是视觉主角，产品 chrome 保持安静。</p></article>
+        <article><b>Causality is visible</b><p>用户能看到指标为何变化、证据来自哪里、动作影响什么。</p></article>
+        <article><b>Uncertainty is explicit</b><p>Observed / Inferred / Simulated 绝不混为一谈。</p></article>
+        <article><b>Human control stays obvious</b><p>Agent 提案可审查，外部写操作必须显式批准。</p></article>
+      </div>
+    </section>
+
+    <section id="tokens" class="section">
+      <div class="section-head"><span>02</span><h2>Tokens</h2></div>
+      <div class="token-grid">
+        <article class="swatch brandc"><b>Brand</b><code>#315DFF</code><small>primary action / selection</small></article>
+        <article class="swatch inkc"><b>Ink</b><code>#070D2D</code><small>headline / primary value</small></article>
+        <article class="swatch surfacec"><b>Surface</b><code>#FFFFFF</code><small>main canvas / panels</small></article>
+        <article class="swatch softc"><b>Surface Soft</b><code>#F8FAFF</code><small>secondary regions</small></article>
+        <article class="swatch successc"><b>Success</b><code>#218653</code><small>verified / healthy</small></article>
+        <article class="swatch warningc"><b>Warning</b><code>#946008</code><small>stale / review</small></article>
+        <article class="swatch errorc"><b>Error</b><code>#D94862</code><small>failed / destructive</small></article>
+        <article class="swatch purplec"><b>Inference</b><code>#8057FF</code><small>model inferred state</small></article>
+      </div>
+      <div class="scale-row"><span>4</span><span>8</span><span>12</span><span>16</span><span>20</span><span>24</span><span>32</span><span>40</span><span>48</span></div>
+    </section>
+
+    <section id="states" class="section">
+      <div class="section-head"><span>03</span><h2>Semantic State Language</h2></div>
+      <div class="state-board">
+        <article class="state-card observed"><span>Observed</span><b>合格商机</b><strong>¥7,240 万</strong><small>直接来自已验证来源</small></article>
+        <article class="state-card inferred"><span>Inferred · 91%</span><b>商机覆盖</b><strong>3.1×</strong><small>推断必须显示置信度与来源</small></article>
+        <article class="state-card simulated"><span>Simulated</span><b>增长场景</b><strong>3.7×</strong><small>虚线边界，永不覆盖 observed baseline</small></article>
+        <article class="state-card unavailable"><span>Unavailable</span><b>真实市场预测</b><strong>—</strong><small>没有证据就显示缺失，不制造数字</small></article>
+      </div>
+    </section>
+
+    <section id="components" class="section">
+      <div class="section-head"><span>04</span><h2>Core Components</h2></div>
+      <div class="component-stage">
+        <div class="component-col">
+          <label>Buttons</label>
+          <button class="btn primary">批准并运行</button><button class="btn secondary">查看证据</button><button class="btn ghost">取消</button>
+          <label>Badges</label>
+          <div class="badge-row"><span class="badge observed">已观测</span><span class="badge inferred">模型推断</span><span class="badge simulated">场景模拟</span><span class="badge review">需复核</span></div>
+        </div>
+        <div class="decision-card">
+          <div class="decision-top"><span class="badge simulated">Scenario</span><small>Human approval required</small></div>
+          <h3>把价格从 ¥6 提高到 ¥8</h3>
+          <p>模型内净贡献更高，但转化下降。建议先运行真实 A/B 校准。</p>
+          <dl><div><dt>Expected</dt><dd>净贡献 ↑</dd></div><div><dt>Risk</dt><dd>转化 ↓</dd></div><div><dt>Scope</dt><dd>白桃气泡水</dd></div></dl>
+          <button class="btn primary">创建实验</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="world" class="section">
+      <div class="section-head"><span>05</span><h2>World Model Signature</h2></div>
+      <div class="world-demo">
+        <div class="world-head"><div><small>BUSINESS WORLD</small><h3>业务因果世界</h3></div><div class="badge-row"><span class="badge observed">已观测</span><span class="badge inferred">模型推断</span><span class="badge simulated">场景模拟</span></div></div>
+        <div class="world-canvas">
+          <svg viewBox="0 0 900 390" aria-hidden="true"><path d="M145 95 C250 95 260 80 365 80"/><path d="M145 290 C255 290 280 170 365 170"/><path d="M490 80 C610 80 600 160 735 160"/><path d="M490 170 C610 170 610 160 735 160"/><path d="M490 280 C610 280 620 175 735 175"/></svg>
+          <button class="node n1 observed"><small>已观测</small><b>合格商机</b><strong>¥7,240 万</strong></button>
+          <button class="node n2 observed"><small>已观测</small><b>销售产能</b><strong>148 AEs</strong></button>
+          <button class="node n3 inferred"><small>模型推断 · 91%</small><b>商机覆盖</b><strong>3.1×</strong></button>
+          <button class="node n4 inferred"><small>模型推断 · 86%</small><b>成交概率</b><strong>27.8%</strong></button>
+          <button class="node n5 observed"><small>已观测</small><b>续费基数</b><strong>¥1,890 万</strong></button>
+          <button class="node n6 outcome"><small>结果</small><b>Q4 收入</b><strong>¥3.46 亿</strong></button>
+        </div>
+      </div>
+    </section>
+
+    <section id="screens" class="section">
+      <div class="section-head"><span>06</span><h2>Screen Anatomy</h2></div>
+      <div class="anatomy">
+        <div class="mini-nav">Nav rail<br><small>global layer switching</small></div>
+        <div class="mini-work">
+          <div class="mini-head">Context header <span>scope · time · scenario · action</span></div>
+          <div class="mini-canvas">Primary canvas<br><small>graph / table / timeline / simulation / report</small></div>
+        </div>
+        <div class="mini-inspector">Inspector<br><small>evidence · provenance · history · actions</small></div>
+      </div>
+    </section>
+
+    <section id="flow" class="section">
+      <div class="section-head"><span>07</span><h2>Canonical Agent Flow</h2></div>
+      <div class="flow">
+        <div><i>1</i><b>你说目标</b><small>business question</small></div><em>→</em>
+        <div><i>2</i><b>Eve 设计实验</b><small>plan_experiment</small></div><em>→</em>
+        <div class="approval"><i>3</i><b>Human Approval</b><small>explicit gate</small></div><em>→</em>
+        <div><i>4</i><b>世界运行</b><small>run_experiment</small></div><em>→</em>
+        <div><i>5</i><b>检查可靠性</b><small>get_run · check_reliability</small></div><em>→</em>
+        <div><i>6</i><b>Eve 解释</b><small>result + limits</small></div>
+      </div>
+    </section>
+
+    <section id="webflow" class="section">
+      <div class="section-head"><span>08</span><h2>Webflow Mapping</h2></div>
+      <div class="mapping">
+        <div><b>Variables</b><span>primitive + semantic color / type / spacing / radius / elevation</span></div>
+        <div><b>Classes & Tags</b><span>layout, state, density, interaction contracts</span></div>
+        <div><b>Components</b><span>Button · Badge · Metric · EvidenceRow · DecisionCard · WorldNode · Inspector</span></div>
+        <div><b>Page Templates</b><span>Workspace · Evidence · Scenario · Report</span></div>
+        <div><b>Screens</b><span>real product states; no text-only flowchart substitute</span></div>
+        <div><b>Interactions</b><span>select · inspect · approve · simulate · verify · report</span></div>
+      </div>
+      <div class="truth-note"><b>Product truth boundary:</b> Observed ≠ Inferred ≠ Simulated. No verified source → no fake KPI. External writes → explicit human approval.</div>
+    </section>
+  </main>
+</div>
+</body>
+</html>
