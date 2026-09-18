@@ -41,7 +41,7 @@ try:
 
         page.goto(URL,wait_until="domcontentloaded")
         expect(page.locator("#landing")).to_be_visible()
-        expect(page.locator("#app")).to_have_class(lambda c:"hidden" in c)
+        assert "hidden" in (page.locator("#app").get_attribute("class") or "")
         assert page.evaluate("location.hash")=="" 
         print("PASS landing starts clean without an app hash",flush=True)
 
@@ -64,8 +64,8 @@ try:
         for route,marker in routes:
             page.locator(f'.navbtn[data-view="{route}"]').click()
             assert page.evaluate("location.hash")==f"#{route}"
-            expect(page.locator(f"#view-{route}")).to_have_class(lambda c:"active" in c)
-            expect(page.locator(f'.navbtn[data-view="{route}"]')).to_have_class(lambda c:"active" in c)
+            assert "active" in (page.locator(f"#view-{route}").get_attribute("class") or "")
+            assert "active" in (page.locator(f'.navbtn[data-view="{route}"]').get_attribute("class") or "")
             expect(page.locator(f"#view-{route}")).to_contain_text(marker)
         print("PASS all 9 primary routes click through with matching active state",flush=True)
 
@@ -84,7 +84,7 @@ try:
         page.locator("#closeDetail").click()
         persona_tabs=page.locator("#view-persona .seg button")
         persona_tabs.nth(1).click()
-        expect(persona_tabs.nth(1)).to_have_class(lambda c:"active" in c)
+        assert "active" in (persona_tabs.nth(1).get_attribute("class") or "")
         print("PASS Persona card and mode tabs are interactive",flush=True)
 
         # World Builder: scenario + entity inspector
@@ -120,7 +120,7 @@ try:
         page.locator('.navbtn[data-view="growth"]').click()
         growth_tabs=page.locator("#view-growth .seg button")
         growth_tabs.nth(1).click()
-        expect(growth_tabs.nth(1)).to_have_class(lambda c:"active" in c)
+        assert "active" in (growth_tabs.nth(1).get_attribute("class") or "")
         page.locator("#view-growth .deep-table tbody tr").first.click()
         expect(page.locator("#detailModal")).to_be_visible()
         expect(page.locator("#detailTitle")).to_have_text("记录详情")
@@ -163,7 +163,7 @@ try:
         page.locator("#sourceBtn").click()
         expect(page.locator("#sourceModal")).to_be_visible()
         page.locator("#cancelSource").click()
-        expect(page.locator("#sourceModal")).to_have_class(lambda c:"hidden" in c)
+        assert "hidden" in (page.locator("#sourceModal").get_attribute("class") or "")
         page.locator("#refreshBtn").click()
         expect(page.locator("#toast")).to_contain_text("已刷新")
         print("PASS source modal and refresh feedback work",flush=True)
@@ -174,7 +174,7 @@ try:
         page.locator(".metric").first.click()
         expect(page.locator("#detailModal")).to_be_visible()
         page.keyboard.press("Escape")
-        expect(page.locator("#detailModal")).to_have_class(lambda c:"hidden" in c)
+        assert "hidden" in (page.locator("#detailModal").get_attribute("class") or "")
         print("PASS keyboard search and Escape close overlays",flush=True)
 
         # Basic overflow check after dense routes
