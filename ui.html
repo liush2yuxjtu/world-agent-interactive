@@ -270,7 +270,7 @@ const evidence=[
 const scenarios=[['08:20','增长计划','提升广告效率 20%','GMV +18.4%'],['07:45','基准情景','保持当前策略','GMV +2.1%'],['昨日 16:05','下行风险','广告预算 -30%','GMV -12.6%']];
 function money(n){return '¥'+Math.round(n).toLocaleString('zh-CN')}
 function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)}
-function setMode(mode){state.mode=mode;$('#landing').classList.toggle('hidden',mode!=='landing');$('#app').classList.toggle('hidden',mode!=='app');$('#landingMode').classList.toggle('active',mode==='landing');$('#appMode').classList.toggle('active',mode==='app');$('#fakeUrl').textContent=mode==='landing'?'https://www.businessworldagent.com':'https://app.businessworldagent.com/'+state.view}
+function setMode(mode){state.mode=mode;$('#landing').classList.toggle('hidden',mode!=='landing');$('#app').classList.toggle('hidden',mode!=='app');$('#landingMode').classList.toggle('active',mode==='landing');$('#appMode').classList.toggle('active',mode==='app');$('#fakeUrl').textContent=mode==='landing'?'https://www.businessworldagent.com':'https://app.businessworldagent.com/'+state.view;if(mode==='app'&&location.hash!=='#'+state.view)setView(state.view||'world')}
 $('#landingMode').onclick=()=>setMode('landing');$('#appMode').onclick=()=>setMode('app');$$('[data-open-app]').forEach(b=>b.onclick=()=>setMode('app'));
 function renderKpis(){const d=state.data;$('#kpiRow').innerHTML=[
  ['GMV',money(d.gmv),'+12.5%'],['转化率',d.conversion.toFixed(2)+'%','+0.6%'],['内容互动量',d.engagement.toLocaleString(),'+18.7%'],['广告 ROI',d.roi.toFixed(2),'+9.1%'],['复购率',d.repeat.toFixed(1)+'%','+2.3%']
